@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fragment_thermostat_settings_schedule_table_row_0" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_1" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_2" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_3" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_4" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_5" type="id" />
+    <item name="fragment_thermostat_settings_schedule_table_row_6" type="id" />
+</resources>

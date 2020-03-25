@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@mipmap/img_home_control" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/homeCoordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/toolbar_background"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:visibility="gone"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/burger_button"
+                android:layout_width="64dp"
+                android:layout_height="56dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/toolbar_button"
+                android:paddingLeft="@dimen/dp_8"
+                app:srcCompat="@drawable/ic_burger" />
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_60"
+                android:layout_toEndOf="@+id/burger_button"
+                android:layout_toRightOf="@+id/burger_button"
+                android:ellipsize="marquee"
+                android:paddingBottom="@dimen/dp_1"
+                android:singleLine="true"
+                android:text="Дом"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textStyle="normal"
+                android:typeface="normal" />
+
+            <ProgressBar
+                android:id="@+id/toolbarProgressBar"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/toolbarTitle"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/menu_button"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/toolbar_button"
+                app:srcCompat="@drawable/ic_menu" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_4"
+        android:layout_below="@+id/appToolbar"
+        android:background="@drawable/shadow_bottom" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_2"
+        android:layout_above="@+id/bottomNavigationView"
+        android:background="@drawable/shadow_top" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_light"
+        android:visibility="gone"
+        app:itemBackground="@color/black_light"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@drawable/bottom_navigation_view_item_background"
+        app:itemTextColor="@drawable/bottom_navigation_view_item_background"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
+</RelativeLayout>

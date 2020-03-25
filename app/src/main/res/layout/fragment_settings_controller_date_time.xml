@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_settings_controller_date_time_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:drawableLeft="@drawable/ic_arrow_left"
+            android:paddingLeft="@dimen/dp_11"
+            android:text="Назад"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_settings_controller_date_time_button_save"
+            android:layout_toRightOf="@id/fragment_settings_controller_date_time_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Дата и время"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_settings_controller_date_time_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Контроллер nooLite PRF-64"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/fragment_settings_controller_date_time_progress_bar_update"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:theme="@style/NooLiteProgressBarLight"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/fragment_settings_controller_date_time_text_view_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="00.00.00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/fragment_settings_controller_date_time_text_view_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="00:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:background="@color/grey" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Автоматически"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/fragment_settings_controller_date_time_switch_automatically"
+            style="@style/NooLiteSwitchCompatStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:background="@color/grey" />
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_automation"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_112"
+    android:background="@drawable/card_view_list_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16">
+
+        <TextView
+            android:id="@+id/card_view_automation_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Автоматика"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_toLeftOf="@id/card_view_automation_state"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/card_view_automation_trigger_entity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Сущность "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/card_view_automation_trigger_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/card_view_automation_trigger_entity"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="''Инициатор'' параметр"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/card_view_automation_unit_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Действие "
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/card_view_automation_unit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/card_view_automation_unit_action"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="''Исполнитель''"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/card_view_automation_state"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:theme="@style/NooLiteSwitchCompatStyle" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/card_view_automation_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:ellipsize="marquee"
+        android:paddingTop="@dimen/dp_2"
+        android:paddingRight="@dimen/dp_4"
+        android:singleLine="true"
+        android:text="[00]"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black_light"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:layout_alignParentBottom="true"
+        android:background="@color/grey"
+        android:layerType="software" />
+
+</RelativeLayout>

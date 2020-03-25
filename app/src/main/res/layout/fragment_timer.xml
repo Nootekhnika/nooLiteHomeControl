@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_timer_button_cancel"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Отменить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/fragment_timer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_timer_button_save"
+            android:layout_toRightOf="@id/fragment_timer_button_cancel"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Таймер"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_timer_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_timer_layout_controller_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@drawable/layout_grey_clickable"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="nooLite PRF-64"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <ProgressBar
+            android:id="@+id/fragment_timer_progressbar_controller_time"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:theme="@style/NooLiteProgressBarLight"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/fragment_timer_text_controller_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Дн  00:00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="Название таймера"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/fragment_timer_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/edit_text_background"
+            android:imeOptions="actionDone"
+            android:maxLength="31"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_8"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="Действие"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/fragment_timer_spinner_action"
+                android:layout_width="match_parent"
+                android:layout_height="28dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/fragment_timer_on_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_28"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Включить в"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/fragment_timer_on_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/black_light"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_timer_off_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Выключить в"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/fragment_timer_off_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/black_light"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_timer_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_monday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Пн"
+                android:textOn="Пн"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_tuesday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Вт"
+                android:textOn="Вт"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_wednesday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Ср"
+                android:textOn="Ср"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_thursday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Чт"
+                android:textOn="Чт"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_friday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Пт"
+                android:textOn="Пт"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_saturday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Сб"
+                android:textOn="Сб"
+                android:textStyle="bold" />
+
+            <ToggleButton
+                android:id="@+id/fragment_timer_toggle_sunday"
+                android:layout_width="@dimen/dp_28"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:background="@drawable/toggle_week_day"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textOff="Вс"
+                android:textOn="Вс"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_timer_type_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_13"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/fragment_timer_title_devices"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:background="@drawable/edit_text_background"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_13"
+                android:text="Устройства"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/fragment_timer_list_devices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/grey"
+                android:dividerHeight="@dimen/dp_1"
+                android:listSelector="@color/transparent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_timer_type_preset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_13"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сценарий"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@drawable/edit_text_background">
+
+                <Spinner
+                    android:id="@+id/fragment_timer_spinner_preset"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_timer_layout_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_light"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/fragment_timer_delete"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Удалить таймер"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+    </LinearLayout>
+</LinearLayout>

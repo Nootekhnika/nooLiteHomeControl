@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background">
+
+    <RelativeLayout
+        android:id="@+id/dialog_libraries_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_56"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Сторонние библиотеки"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+        <ImageButton
+            android:id="@+id/dialog_libraries_button_close"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_leaf_dark"
+            app:srcCompat="@drawable/ic_x" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_navigation_view_elevation"
+        android:layout_below="@+id/dialog_libraries_toolbar"
+        android:background="@drawable/shadow_bottom" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_libraries_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_8">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OkHttp3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by Square"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="android-material-color-picker-dialog"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by Pes8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="material-range-bar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="by oli107"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black_light"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

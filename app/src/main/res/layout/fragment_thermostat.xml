@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/fragment_thermostat_button_cancel"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Отменить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_thermostat_button_save"
+            android:layout_toRightOf="@id/fragment_thermostat_button_cancel"
+            android:ellipsize="marquee"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="Настройка"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_thermostat_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_8"
+            android:paddingBottom="@dimen/dp_16">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/fragment_thermostat_layout_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10.5dp"
+                        android:layout_height="14dp"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_temperature" />
+
+                    <TextView
+                        android:id="@+id/fragment_thermostat_text_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="--°C"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/black_light"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_toLeftOf="@id/fragment_thermostat_button_settings"
+                    android:layout_toRightOf="@id/fragment_thermostat_layout_temperature"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/dp_8"
+                        android:paddingTop="@dimen/dp_2"
+                        android:paddingRight="@dimen/dp_8">
+
+                        <TextView
+                            android:id="@+id/fragment_thermostat_text_room"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="Комната"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fragment_thermostat_text_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="Название"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/dp_2">
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/fragment_thermostat_switch_state"
+                            style="@style/NooLiteSwitchCompatStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/fragment_thermostat_button_settings"
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/button_round_background"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_settings_dark" />
+
+            </RelativeLayout>
+
+            <TableLayout
+                android:id="@+id/fragment_thermostat_schedule_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_8" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

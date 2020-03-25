@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp">
+
+    <RelativeLayout
+        android:id="@+id/card_view_preset_list_item_home_activity_layout_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_view_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dp_8">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_view_preset_list_item_home_activity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+</LinearLayout>

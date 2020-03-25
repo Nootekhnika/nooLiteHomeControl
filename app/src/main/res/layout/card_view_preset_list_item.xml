@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingRight="16dp">
+
+    <RelativeLayout
+        android:id="@+id/card_view_preset_list_item_layout_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@drawable/card_view_background"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_8">
+
+        <TextView
+            android:id="@+id/card_view_preset_list_item_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Сценарий"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+</LinearLayout>

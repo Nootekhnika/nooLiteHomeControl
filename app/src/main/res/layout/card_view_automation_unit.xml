@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/card_view_automation_unit_layout"
+    android:layout_width="match_parent"
+    android:layout_height="49dp"
+    android:background="@drawable/card_view_list_background"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <ImageView
+            android:id="@+id/card_view_automation_unit_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            app:srcCompat="@color/grey_light" />
+
+        <TextView
+            android:id="@+id/card_view_automation_unit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/card_view_automation_unit_icon"
+            android:ellipsize="end"
+            android:lines="1"
+            android:paddingLeft="@dimen/dp_8"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="normal"
+            tool:text="..." />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:background="@color/grey"
+        android:layerType="software" />
+
+</LinearLayout>

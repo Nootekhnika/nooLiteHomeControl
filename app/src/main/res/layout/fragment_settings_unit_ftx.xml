@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_settings_unit_ftx_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:drawableLeft="@drawable/ic_arrow_left"
+            android:paddingLeft="@dimen/dp_11"
+            android:text="Назад"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_settings_unit_ftx_button_save"
+            android:layout_toRightOf="@id/fragment_settings_unit_ftx_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Настройки"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_settings_unit_ftx_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Минимальный уровень включения"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_switch_on_level"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <com.noolitef.customview.PercentageSeekBar
+                        android:id="@+id/fragment_settings_unit_ftx_seek_switch_on_level"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:max="50"
+                        android:padding="0dp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/dimmer_background"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/dimmer_thumb"
+                        android:thumbOffset="0dp"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_switch_on_level_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Настройка диммирования"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_dimming_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="Диммирование"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <ProgressBar
+                            android:id="@+id/fragment_settings_unit_ftx_progress_dimming"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:theme="@style/NooLiteProgressBarDark"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/fragment_settings_unit_ftx_image_dimming_warning"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="2dp"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_warning" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/fragment_settings_unit_ftx_switch_dimming_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:paddingRight="16dp"
+                        android:theme="@style/NooLiteSwitchCompatStyle"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_settings_unit_ftx_layout_dimming_range"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="@color/grey" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Коррекция диммирования"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <com.appyvet.materialrangebar.RangeBar
+                            android:id="@+id/fragment_settings_unit_ftx_range_dimming"
+                            android:layout_width="match_parent"
+                            android:layout_height="72dp"
+                            android:visibility="gone"
+                            app:mrb_barWeight="4dp"
+                            app:mrb_connectingLineColor="@color/black_light"
+                            app:mrb_connectingLineWeight="4dp"
+                            app:mrb_pinColor="@color/transparent"
+                            app:mrb_pinMaxFont="14sp"
+                            app:mrb_pinMinFont="14sp"
+                            app:mrb_pinRadius="16dp"
+                            app:mrb_pinTextColor="@color/black_light"
+                            app:mrb_rangeBar="true"
+                            app:mrb_rangeBarColor="@color/grey"
+                            app:mrb_rangeBarPaddingBottom="14dp"
+                            app:mrb_selectorColor="@color/black_light"
+                            app:mrb_selectorSize="8dp"
+                            app:mrb_temporaryPins="false"
+                            app:mrb_tickColor="@color/transparent"
+                            app:mrb_tickEnd="100"
+                            app:mrb_tickInterval="1"
+                            app:mrb_tickStart="0" />
+
+                        <LinearLayout
+                            android:id="@+id/fragment_settings_unit_ftx_layout_dimming_range_alternative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/fragment_settings_unit_ftx_text_dimming_lower_level"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
+                                android:gravity="left|center"
+                                android:paddingTop="4dp"
+                                android:text="0%"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal" />
+
+                            <com.appyvet.materialrangebar.RangeBar
+                                android:id="@+id/fragment_settings_unit_ftx_range_dimming_alternative"
+                                android:layout_width="match_parent"
+                                android:layout_height="36dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:mrb_barWeight="4dp"
+                                app:mrb_connectingLineColor="@color/black_light"
+                                app:mrb_connectingLineWeight="4dp"
+                                app:mrb_pinColor="@color/transparent"
+                                app:mrb_pinMaxFont="14sp"
+                                app:mrb_pinMinFont="14sp"
+                                app:mrb_pinRadius="0dp"
+                                app:mrb_pinTextColor="@color/black_light"
+                                app:mrb_rangeBar="true"
+                                app:mrb_rangeBarColor="@color/grey"
+                                app:mrb_rangeBarPaddingBottom="@dimen/dp_14"
+                                app:mrb_selectorColor="@color/black_light"
+                                app:mrb_selectorSize="8dp"
+                                app:mrb_temporaryPins="false"
+                                app:mrb_tickColor="@color/transparent"
+                                app:mrb_tickEnd="100"
+                                app:mrb_tickInterval="1"
+                                app:mrb_tickStart="0" />
+
+                            <TextView
+                                android:id="@+id/fragment_settings_unit_ftx_text_dimming_upper_level"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
+                                android:gravity="right|center"
+                                android:paddingTop="4dp"
+                                android:text="100%"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Память состояний"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp">
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_memory_state"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/fragment_settings_unit_ftx_layout_memory_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/fragment_settings_unit_ftx_checkbox_power_up_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@null"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="включать при подаче питания"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold"
+                            android:theme="@style/NooLiteCheckBoxStyle" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:background="@color/grey" />
+
+                        <android.support.v7.widget.AppCompatCheckBox
+                            android:id="@+id/fragment_settings_unit_ftx_checkbox_remember_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@null"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="запоминать состояние"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold"
+                            android:theme="@style/NooLiteCheckBoxStyle" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_memory_state_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@color/grey" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Яркость при включении"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_switch_on_brightness"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_switch_on_brightness_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_settings_unit_ftx_layout_switch_on_brightness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="16dp"
+                    android:visibility="gone">
+
+                    <com.noolitef.customview.PercentageSeekBar
+                        android:id="@+id/fragment_settings_unit_ftx_seek_switch_on_brightness"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:max="100"
+                        android:padding="0dp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/dimmer_background"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/dimmer_thumb"
+                        android:thumbOffset="0dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="@color/grey" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <!-- "Состояние внешней кнопки" -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Режим работы входа управления"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_external_input_state"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_external_input_state"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="2dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+                <RadioGroup
+                    android:id="@+id/fragment_settings_unit_ftx_group_external_input_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="16dp"
+                    android:visibility="gone">
+
+                    <!-- "инвертер включения/выключения" -->
+                    <RadioButton
+                        android:id="@+id/fragment_settings_unit_ftx_radio_external_input_state_switch_off"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="переключающий выключатель"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="normal"
+                        android:theme="@style/NooLiteRadioButtonStyle" />
+
+                    <!-- "переключатель" -->
+                    <RadioButton
+                        android:id="@+id/fragment_settings_unit_ftx_radio_external_input_state_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="кнопка"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="normal"
+                        android:theme="@style/NooLiteRadioButtonStyle" />
+
+                    <!-- "включатель" -->
+                    <RadioButton
+                        android:id="@+id/fragment_settings_unit_ftx_radio_external_input_state_switch_on"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="выключатель"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="normal"
+                        android:theme="@style/NooLiteRadioButtonStyle" />
+
+                    <!-- "не используется" -->
+                    <RadioButton
+                        android:id="@+id/fragment_settings_unit_ftx_radio_external_input_state_none"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="не используется"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black_light"
+                        android:textStyle="normal"
+                        android:theme="@style/NooLiteRadioButtonStyle" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Настройка ретрансляции nooLite"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_retransmission_state"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="Ретрансляция"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <ProgressBar
+                            android:id="@+id/fragment_settings_unit_ftx_progress_retransmission_state"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:theme="@style/NooLiteProgressBarDark"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/fragment_settings_unit_ftx_image_retransmission_state_warning"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="2dp"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_warning" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/fragment_settings_unit_ftx_switch_retransmission_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:paddingRight="16dp"
+                        android:theme="@style/NooLiteSwitchCompatStyle"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_settings_unit_ftx_layout_retransmission_delay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:background="@color/grey" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Задержка ретрансляции"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingBottom="16dp">
+
+                        <com.noolitef.customview.RetransmissionDelaySeekBar
+                            android:id="@+id/fragment_settings_unit_ftx_seek_retransmission_delay"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_28"
+                            android:layout_centerVertical="true"
+                            android:background="@null"
+                            android:max="255"
+                            android:padding="0dp"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/dimmer_background"
+                            android:splitTrack="false"
+                            android:thumb="@drawable/retransmission_delay_thumb"
+                            android:thumbOffset="0dp"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Настройка блокировок"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp">
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_locks_config"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/fragment_settings_unit_ftx_layout_locks_config"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <CheckBox
+                            android:id="@+id/fragment_settings_unit_ftx_checkbox_noolite_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@null"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="запретить протокол nooLite"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold"
+                            android:theme="@style/NooLiteCheckBoxStyle" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:background="@color/grey" />
+
+                        <CheckBox
+                            android:id="@+id/fragment_settings_unit_ftx_checkbox_temporary_on_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@null"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="запретить включение на время"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold"
+                            android:theme="@style/NooLiteCheckBoxStyle" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_locks_config_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Дополнительная информация"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_addition_info"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:paddingRight="4dp"
+                            android:singleLine="true"
+                            android:text="Тип устройства:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_info_device_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="-"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:paddingRight="4dp"
+                            android:singleLine="true"
+                            android:text="Версия прошивки:"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_info_firmware_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="-"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="Свободные ячейки памяти: "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_info_free_noolite_cells"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="nooLite: -"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="normal" />
+
+                        <TextView
+                            android:id="@+id/fragment_settings_unit_ftx_text_info_free_noolitef_cells"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:singleLine="true"
+                            android:text="nooLite-F: -"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/black_light"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

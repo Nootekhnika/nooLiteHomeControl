@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/card_view_thermostat"
+        android:layout_width="@dimen/card_view_dimensions"
+        android:layout_height="@dimen/card_view_dimensions"
+        android:background="@drawable/card_view_background_dark">
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:paddingRight="@dimen/dp_1"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_temperature_grey" />
+
+                    <TextView
+                        android:id="@+id/card_view_thermostat_current_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0°C"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/card_view_thermostat_target_temperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_view_thermostat_out_off_light"
+                    android:gravity="center"
+                    android:text="0°C"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/card_view_thermostat_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Комната"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/card_view_thermostat_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Устройство"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/card_view_thermostat_state"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/card_view_state_not_connected"
+            android:layerType="software" />
+
+        <ProgressBar
+            android:id="@+id/card_view_thermostat_progressbar"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dp_4"
+            android:theme="@style/NooLiteProgressBarLight"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/card_view_thermostat_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_view_thermostat_state"
+            android:layout_alignParentRight="true"
+            android:ellipsize="marquee"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_4"
+            android:singleLine="true"
+            android:text="[FTX00]"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

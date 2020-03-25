@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Home Control</string>
+    <string name="app_widget_preset_name">Сценарий</string>
+    <string name="app_toolbar_title">Кухня</string>
+    <string name="bottom_navigation_menu_item_house_title">Дом</string>
+    <string name="bottom_navigation_menu_item_room_title">Комната</string>
+    <string name="bottom_navigation_menu_item_timers_title">Таймеры</string>
+    <string name="bottom_navigation_menu_item_automation_title">Автоматика</string>
+    <string name="drawer_close">drawer close</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="recycler_view_header_devices">Устройства</string>
+
+    <string name="no_connection">Нет соединения…</string>
+    <string name="connection_error">Ошибка соединения\u0020</string>
+    <string name="no_response">Контроллер не отвечает</string>
+    <string name="some_thing_went_wrong">Что-то пошло не так…</string>
+
+    <string-array name="timeRange">
+        <item>День</item>
+        <item>Неделя</item>
+    </string-array>
+
+    <string-array name="unitType">
+        <item>выберите тип устройства...</item>
+        <item>Силовой блок nooLite-F</item>
+        <item>Силовой блок nooLite</item>
+        <item>Датчик/пульт nooLite</item>
+    </string-array>
+
+    <string-array name="deviceType">
+        <item>выберите тип блока...</item>
+        <item>Диммер</item>
+        <item>Реле</item>
+        <item>Импульсное реле</item>
+        <item>Светодиодный контроллер</item>
+        <item>Блок управления роллетами</item>
+    </string-array>
+
+    <string-array name="timerType">
+        <item>выберите действие...</item>
+        <item>Включить</item>
+        <item>Рассвет</item>
+        <item>Выключить</item>
+        <item>Закат</item>
+        <item>Включить и выключить</item>
+        <item>Вызвать сценарий</item>
+    </string-array>
+
+    <string-array name="automationTemperatureTriggerConditions">
+        <item>нагрев</item>
+        <item>охлаждение</item>
+    </string-array>
+
+    <string-array name="automationHumidityTemperatureTriggerConditions">
+        <item>нагрев</item>
+        <item>охлаждение</item>
+        <item>осушение</item>
+        <item>увлажнение</item>
+    </string-array>
+
+    <string-array name="automationRemoteTriggerEvents">
+        <item>выключение</item>    <!-- CMD: 0 -->
+        <item>включение</item>     <!-- CMD: 2 -->
+        <item>переключение</item>  <!-- CMD: 4 -->
+    </string-array>
+
+    <string-array name="automationMotionTriggerEvents">
+        <item>движение</item>  <!-- CMD: 25 -->
+    </string-array>
+
+    <string-array name="automationLightTriggerEvents">
+        <item>тень</item>  <!-- CMD: 2 -->
+        <item>свет</item>  <!-- CMD: 0 -->
+    </string-array>
+
+    <string-array name="automationOpenCloseTriggerEvents">
+        <item>закрытие</item>  <!-- CMD: 0 -->
+        <item>открытие</item>  <!-- CMD: 2 -->
+    </string-array>
+
+    <string-array name="automationLeakTriggerEvents">
+        <item>осушениие</item>  <!-- CMD: 0 -->
+        <item>протечка</item>   <!-- CMD: 2 -->
+    </string-array>
+
+    <string-array name="automationActions">
+        <item>выключить</item>          <!-- CMD: 0 -->
+        <item>включить</item>           <!-- CMD: 2 -->
+    </string-array>
+
+    <string-array name="automationActionsRelay">
+        <item>выключить</item>          <!-- CMD: 0 -->
+        <item>включить</item>           <!-- CMD: 2 -->
+        <item>включить на время</item>  <!-- CMD: 25 -->
+    </string-array>
+
+    <string-array name="automationActionsDimmer">
+        <item>выключить</item>    <!-- CMD: 0 -->
+        <item>включить</item>     <!-- CMD: 2 -->
+        <item>диммировать</item>  <!-- CMD: 6 -->
+    </string-array>
+
+    <string name="ester_egg">
+        \tПриветствую вас, любопытный пользователь!
+        \n\tА правда в том, что программный код этого приложения написан не предприятием и даже не одним человеком (хотя... сам код, конечно, одним). Это приложение — результат работы группы инженеров и программистов. И я — Александр Авдеев, как разработчик, имеющий власть вносить в код любые изменения (даже в тайне от руководства), хочу поблагодарить всех тех, кто оказывал содействие и принимал участие в разработке.
+        \n\tВ первую очередь благодарю Дмитрия Мигаля за создание контроллера PRF-64 и API к нему, без которых nooLite Home Control не мог бы существовать в принципе, и за серьезные ответы на глупые вопросы разработчиков. Александра Климчика за последующую работу над контроллером и разработку новых исполнительных устройств nooLite, а также API к ним. Сергея Глеба за разработку iOS-версии приложения и совместное решение некоторых алгоритмических задач. Екатерину Дмитриеву — дизайнера проекта.
+        \n\tОсобая благодарность Маргарите — QA-инженеру. Она всегда находит слабые места в очередной версии приложения и мотивирует тем самым разработчика улучшать качество написанного кода. А также помогает исправлять описки и грамматические ошибки, сохраняя веру в то, что программисты когда-нибудь научатся хорошо писать не только на языках программирования.
+        \n\tВыражаю благодарность Дмитрию Глебику за содействие в решении некоторых практических задач и тестирование, его телефонам на которых сразу видны ошибки верстки интерфейса. Евгению Савостьянову за конструктивную критику и тестирование приложения. Ольге Анатольевне и Ирине за предоставление всех необходимых устройств для проверки работы контроллера и приложения. Также благодарю Павла Медведева за техническую поддержку и мудрые советы.
+        \n\tОгромная благодарность всем, кто так или иначе участвовал в тестировании, выражал свое мнение и делился пожеланиями по поводу работы приложения. Что бы я без вас делал...
+        \n\tОтдельная благодарность директору Игорю Чавлытко за то, что он собрал всех этих людей вместе и еще за материальную поддержку разработчиков, что тоже немаловажно. Благодарю Юрия Блощицына за содействие в работе с консолью разработчика Google.
+        \n\tИ конечно же спасибо всем тем, кто ждал новый контроллер и всем, кому просто нравятся всякие электронные штуки для домашней автоматизации. Мы создаем всё это для вас...
+    </string>
+
+    <string name="card_view_preset_list_item_home_activity">Пока нет ни одного сценария...\nНажмите сюда, чтобы создать новый!</string>
+</resources>

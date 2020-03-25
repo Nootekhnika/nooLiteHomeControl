@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_settings_controller_backup_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_light"
+            android:drawableLeft="@drawable/ic_arrow_left"
+            android:paddingLeft="@dimen/dp_13"
+            android:text="Назад"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_toRightOf="@id/fragment_settings_controller_backup_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Резервирование"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/grey"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Контроллер nooLite PRF-64"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_16">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Резервное копирование настроек позволяет сохранить конфигурацию контроллера в память приложения"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:id="@+id/fragment_settings_controller_backup_button_copy"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:background="@drawable/button_dark"
+                    android:text="Выполнить копирование"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1_5"
+                android:background="@color/grey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Резервное копирование"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/fragment_settings_controller_backup_text_date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="не выполнялось"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1_5"
+                android:background="@color/grey" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_16">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Восстановление настроек позволяет загрузить сохраненную ранее конфигурацию контроллера из памяти приложения"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:id="@+id/fragment_settings_controller_backup_button_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_48"
+                    android:background="@drawable/button_dark"
+                    android:text="Выполнить восстановление"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/black_light"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

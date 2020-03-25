@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/menu_item_refresh"
+            android:title="Обновить" />
+        <item
+            android:id="@+id/menu_item_preset"
+            android:title="Добавить сценарий..." />
+        <item
+            android:id="@+id/menu_item_bind"
+            android:title="Добавить устройство..." />
+        <item
+            android:id="@+id/menu_item_settings"
+            android:title="Настройки..." />
+    </group>
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/menu_item_night_mode"
+            android:title="Ночной режим" />
+    </group>
+    <!--
+    <item
+        android:id="@+id/menu_item_connect"
+        android:title="Connect to Hub" />
+    -->
+</menu>

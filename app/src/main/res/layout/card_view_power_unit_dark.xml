@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:id="@+id/card_view_power_unit"
+        android:layout_width="@dimen/card_view_dimensions"
+        android:layout_height="@dimen/card_view_dimensions"
+        android:background="@drawable/card_view_background_dark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/card_view_power_unit_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:paddingTop="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_4"
+            android:singleLine="true"
+            android:text="[TX00]"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/card_view_power_unit_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_bulb_grey" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dp_8">
+
+            <TextView
+                android:id="@+id/card_view_power_unit_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Комната"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/card_view_power_unit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Устройство"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

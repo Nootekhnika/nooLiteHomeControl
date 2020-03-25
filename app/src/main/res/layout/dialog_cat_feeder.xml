@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_16"
+    android:background="@drawable/dialog_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="0dp"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/button_feed_the_cat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_dark"
+                android:paddingBottom="@dimen/dp_48"
+                android:src="@mipmap/ic_feed_the_cat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="@dimen/dp_32"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text=" ПОКОРМИТЬ КОТА "
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/black_light"
+                android:textStyle="normal" />
+        </FrameLayout>
+    </RelativeLayout>
+</RelativeLayout>

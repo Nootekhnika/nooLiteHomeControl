@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+    <RelativeLayout
+        android:id="@+id/widget_preset_layout_clickable"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/widget_preset_background"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="Сценарий"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/widget_preset_text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/widget_preset_progress_bar"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:theme="@style/NooLiteProgressBarLight"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+</FrameLayout>

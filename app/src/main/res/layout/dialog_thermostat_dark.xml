@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_6">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10.5dp"
+                        android:layout_height="14dp"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_temperature_grey" />
+
+                    <TextView
+                        android:id="@+id/dialog_thermostat_current_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0°C"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/grey"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/dialog_thermostat_target_temperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_view_thermostat_out_off_light"
+                        android:gravity="center"
+                        android:text="0°C"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="normal" />
+
+                    <ProgressBar
+                        android:id="@+id/dialog_thermostat_target_temperature_updating"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_centerInParent="true"
+                        android:theme="@style/NooLiteProgressBarLight"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_40"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dialog_thermostat_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Комната"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dialog_thermostat_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Устройство"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.noolitef.customview.ThermostatSeekBar
+                android:id="@+id/dialog_thermostat_seek_bar_temperature"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:background="@null"
+                android:max="45"
+                android:padding="0dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/dimmer_background_dark"
+                android:splitTrack="false"
+                android:thumb="@drawable/dimmer_thumb_dark"
+                android:thumbOffset="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialog_thermostat_button_on"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginRight="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@drawable/button_grey"
+                android:text="Включить"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/dialog_thermostat_button_off"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@drawable/button_grey"
+                android:text="Выключить"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/dialog_thermostat_settings"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_round_background_dark"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_settings_grey" />
+</RelativeLayout>

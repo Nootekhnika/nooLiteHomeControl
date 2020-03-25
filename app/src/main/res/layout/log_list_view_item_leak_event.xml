@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_8">
+
+        <TextView
+            android:id="@+id/log_list_view_item_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/log_list_view_item_time"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Сухо"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/log_list_view_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/dp_8"
+            android:text="00.00.00  00:00.00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black_light"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+
+</LinearLayout>

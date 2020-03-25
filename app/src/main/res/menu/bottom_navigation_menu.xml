@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_navigation_item_home"
+        android:icon="@drawable/ic_home"
+        android:title="Дом" />
+    <item
+        android:id="@+id/bottom_navigation_item_room"
+        android:icon="@drawable/ic_room"
+        android:title="@string/bottom_navigation_menu_item_room_title" />
+    <item
+        android:id="@+id/bottom_navigation_item_timers"
+        android:icon="@drawable/ic_timer"
+        android:title="@string/bottom_navigation_menu_item_timers_title" />
+    <item
+        android:id="@+id/bottom_navigation_item_automatics"
+        android:icon="@drawable/ic_automation"
+        android:title="@string/bottom_navigation_menu_item_automation_title" />
+</menu>
