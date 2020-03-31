@@ -1002,7 +1002,7 @@ class PRF64(private val activity: Activity) {
                             }
                         }
 
-                var unit: Any? = null
+                var ftxUnit: Any? = null
                 var unitNameByte = -1
                 // PRESET
                 if (command[0] == 254) {
@@ -1021,7 +1021,7 @@ class PRF64(private val activity: Activity) {
                             deviceId = "%2s%2s%2s%2s".format(Integer.toHexString(toUnsignedByte(device[deviceByte + 0])), Integer.toHexString(toUnsignedByte(device[deviceByte + 1])), Integer.toHexString(toUnsignedByte(device[deviceByte + 2])), Integer.toHexString(toUnsignedByte(device[deviceByte + 3]))).replace(' ', '0').toUpperCase(Locale.ROOT)
 
                             if (deviceId == unitId) {
-                                unit = getUnit(unitIndex)
+                                ftxUnit = getFtxUnit(unitIndex)
                                 unitNameByte = 4358 + unitIndex * 34
 
                                 break
@@ -1034,7 +1034,7 @@ class PRF64(private val activity: Activity) {
                 val unitName = parseUnitName(user, unitNameByte)
 
                 val automation = Automation(automationIndex, name, type, state, triggerType, triggerIndex, parameter, command, entityName, triggerName, eventName, unitAction, unitName, getRxUnit(triggerIndex))
-                automation.allowTemporaryOn(unit !is Thermostat)
+                automation.allowTemporaryOn(ftxUnit !is Thermostat)
                 automatics.add(automation)
             }
 
@@ -1408,16 +1408,9 @@ class PRF64(private val activity: Activity) {
         return null
     }
 
-    private fun getUnit(index: Int?): Any? {
+    private fun getFtxUnit(index: Int?): Any? {
 
         if (index == null) return null
-
-        for (powerUnit in powerUnits) {
-            if (powerUnit.channel == index) {
-
-                return powerUnit
-            }
-        }
 
         for (powerUnitF in powerUnitsF) {
             if (powerUnitF.index == index) {
