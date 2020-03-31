@@ -111,7 +111,12 @@ public class PresetFragment extends DialogFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
-        View fragment = inflater.inflate(R.layout.fragment_preset, null);
+        View fragment;
+        if (Settings.isNightMode()) {
+            fragment = inflater.inflate(R.layout.fragment_preset_dark, null);
+        } else {
+            fragment = inflater.inflate(R.layout.fragment_preset, null);
+        }
 
         cancelButton = (Button) fragment.findViewById(R.id.fragment_preset_button_cancel);
         cancelButton.setOnClickListener(this);

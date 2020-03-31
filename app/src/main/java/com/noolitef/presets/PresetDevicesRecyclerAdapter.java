@@ -422,31 +422,61 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         View view;
-        switch (type) {
-            case ROOM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room, parent, false);
-                return new RoomViewHolder(view);
-            case POWER_UNIT_RELAY:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
-                return new RelayViewHolder(view);
-            case POWER_UNIT_DIMMER:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer, parent, false);
-                return new DimmerViewHolder(view);
-            case POWER_UNIT_F_RELAY:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
-                return new RelayViewHolder(view);
-            case POWER_UNIT_F_DIMMER:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer, parent, false);
-                return new DimmerViewHolder(view);
-            case POWER_SOCKET_F:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
-                return new RelayViewHolder(view);
-            case THERMOSTAT:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_thermostat, parent, false);
-                return new ThermostatViewHolder(view);
-            case ROLLET_UNIT_F:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_rollet, parent, false);
-                return new RolletViewHolder(view);
+        if (Settings.isNightMode()) {
+            switch (type) {
+                case ROOM:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room_dark, parent, false);
+                    return new RoomViewHolder(view);
+                case POWER_UNIT_RELAY:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay_dark, parent, false);
+                    return new RelayViewHolder(view);
+                case POWER_UNIT_DIMMER:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer_dark, parent, false);
+                    return new DimmerViewHolder(view);
+                case POWER_UNIT_F_RELAY:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay_dark, parent, false);
+                    return new RelayViewHolder(view);
+                case POWER_UNIT_F_DIMMER:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer_dark, parent, false);
+                    return new DimmerViewHolder(view);
+                case POWER_SOCKET_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay_dark, parent, false);
+                    return new RelayViewHolder(view);
+                case THERMOSTAT:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_thermostat_dark, parent, false);
+                    return new ThermostatViewHolder(view);
+                case ROLLET_UNIT_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_rollet_dark, parent, false);
+                    return new RolletViewHolder(view);
+            }
+        } else {
+
+            switch (type) {
+                case ROOM:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room, parent, false);
+                    return new RoomViewHolder(view);
+                case POWER_UNIT_RELAY:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
+                    return new RelayViewHolder(view);
+                case POWER_UNIT_DIMMER:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer, parent, false);
+                    return new DimmerViewHolder(view);
+                case POWER_UNIT_F_RELAY:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
+                    return new RelayViewHolder(view);
+                case POWER_UNIT_F_DIMMER:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_dimmer, parent, false);
+                    return new DimmerViewHolder(view);
+                case POWER_SOCKET_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_relay, parent, false);
+                    return new RelayViewHolder(view);
+                case THERMOSTAT:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_thermostat, parent, false);
+                    return new ThermostatViewHolder(view);
+                case ROLLET_UNIT_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_preset_device_rollet, parent, false);
+                    return new RolletViewHolder(view);
+            }
         }
         return null;
     }

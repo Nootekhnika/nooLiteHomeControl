@@ -33,6 +33,11 @@
         <item name="colorControlNormal">@color/grey</item>
     </style>
 
+    <style name="NooLiteCheckBoxStyleGrey" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/grey</item>
+        <item name="colorControlNormal">@color/grey</item>
+    </style>
+
     <style name="PopupMenuDark" parent="Widget.AppCompat.PopupMenu">
         <item name="android:textColor">@color/grey</item>
         <item name="android:itemBackground">@drawable/popup_menu_item_background_dark</item>
