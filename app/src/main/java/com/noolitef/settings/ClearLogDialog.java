@@ -51,7 +51,12 @@ public class ClearLogDialog extends DialogFragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
         getDialog().getWindow().setBackgroundDrawableResource(R.color.transparent);
-        View dialog = inflater.inflate(R.layout.dialog_clear_log, null);
+        View dialog;
+        if (Settings.isNightMode()) {
+            dialog = inflater.inflate(R.layout.dialog_clear_log_dark, null);
+        } else {
+            dialog = inflater.inflate(R.layout.dialog_clear_log, null);
+        }
         clearButton = (Button) dialog.findViewById(R.id.dialog_clear_log_button_confirm);
         clearButton.setOnClickListener(this);
         cancelButton = (Button) dialog.findViewById(R.id.dialog_clear_log_button_cancel);

@@ -30,7 +30,12 @@ public class AboutLibrariesDialog extends DialogFragment implements View.OnClick
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setBackgroundDrawableResource(R.color.transparent);
         getDialog().setCanceledOnTouchOutside(true);
-        View dialog = inflater.inflate(R.layout.dialog_about_libraries, null);
+        View dialog;
+        if (Settings.isNightMode()) {
+          dialog = inflater.inflate(R.layout.dialog_about_libraries_dark, null);
+        } else {
+           dialog = inflater.inflate(R.layout.dialog_about_libraries, null);
+        }
         closeButton = dialog.findViewById(R.id.dialog_libraries_button_close);
         closeButton.setOnClickListener(this);
         return dialog;

@@ -114,7 +114,12 @@ public class SettingsControllerIPFragment extends DialogFragment implements View
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_settings_controller_ip, null);
+        View fragmentView;
+        if (Settings.isNightMode()) {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller_ip_dark, null);
+        } else {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller_ip, null);
+        }
         buttonBack = (Button) fragmentView.findViewById(R.id.fragment_settings_controller_ip_button_back);
         buttonBack.setOnClickListener(this);
         buttonSave = (Button) fragmentView.findViewById(R.id.fragment_settings_controller_ip_button_save);

@@ -18,6 +18,7 @@ import com.noolitef.ftx.PowerSocketF
 import com.noolitef.ftx.PowerUnitF
 import com.noolitef.presets.Preset
 import com.noolitef.rx.*
+import com.noolitef.settings.Settings
 import com.noolitef.tx.PowerUnit
 
 class AutomationUnitListAdapter(
@@ -63,10 +64,19 @@ class AutomationUnitListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return when (viewType) {
-            ROOM -> AutomationRoomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_room, parent, false))
-            INFO -> AutomationInfoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_info, parent, false))
-            else -> AutomationUnitViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_unit, parent, false))
+
+        if (Settings.isNightMode()) {
+            return when (viewType) {
+                ROOM -> AutomationRoomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_room, parent, false))
+                INFO -> AutomationInfoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_info_dark, parent, false))
+                else -> AutomationUnitViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_unit, parent, false))
+            }
+        } else {
+            return when (viewType) {
+                ROOM -> AutomationRoomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_room, parent, false))
+                INFO -> AutomationInfoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_info, parent, false))
+                else -> AutomationUnitViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.card_view_automation_unit, parent, false))
+            }
         }
     }
 

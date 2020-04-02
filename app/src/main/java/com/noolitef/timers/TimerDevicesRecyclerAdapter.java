@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.noolitef.HomeActivity;
 import com.noolitef.NooLiteF;
 import com.noolitef.ftx.PowerSocketF;
+import com.noolitef.settings.Settings;
 import com.noolitef.tx.PowerUnit;
 import com.noolitef.ftx.PowerUnitF;
 import com.noolitef.R;
@@ -114,17 +115,32 @@ class TimerDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         View view;
-        switch (type) {
-            case ROOM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room, parent, false);
-                RoomViewHolder roomViewHolder = new RoomViewHolder(view);
-                return roomViewHolder;
-            case POWER_UNIT:
-            case POWER_UNIT_F:
-            case POWER_SOCKET_F:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_timer_device, parent, false);
-                DeviceViewHolder deviceViewHolder = new DeviceViewHolder(view);
-                return deviceViewHolder;
+        if (Settings.isNightMode()) {
+            switch (type) {
+                case ROOM:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room, parent, false);
+                    RoomViewHolder roomViewHolder = new RoomViewHolder(view);
+                    return roomViewHolder;
+                case POWER_UNIT:
+                case POWER_UNIT_F:
+                case POWER_SOCKET_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_timer_device_dark, parent, false);
+                    DeviceViewHolder deviceViewHolder = new DeviceViewHolder(view);
+                    return deviceViewHolder;
+            }
+        } else {
+            switch (type) {
+                case ROOM:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_room, parent, false);
+                    RoomViewHolder roomViewHolder = new RoomViewHolder(view);
+                    return roomViewHolder;
+                case POWER_UNIT:
+                case POWER_UNIT_F:
+                case POWER_SOCKET_F:
+                    view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view_timer_device, parent, false);
+                    DeviceViewHolder deviceViewHolder = new DeviceViewHolder(view);
+                    return deviceViewHolder;
+            }
         }
         return null;
     }

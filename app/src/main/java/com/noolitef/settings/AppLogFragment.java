@@ -43,7 +43,12 @@ public class AppLogFragment extends DialogFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_app_error_log, null);
+        View fragmentView;
+        if (Settings.isNightMode()) {
+            fragmentView = inflater.inflate(R.layout.fragment_app_error_log_dark, null);
+        } else {
+            fragmentView = inflater.inflate(R.layout.fragment_app_error_log, null);
+        }
         buttonBack = fragmentView.findViewById(R.id.fragment_app_log_button_back);
         buttonBack.setOnClickListener(this);
         editLog = fragmentView.findViewById(R.id.fragment_app_error_log_edit);

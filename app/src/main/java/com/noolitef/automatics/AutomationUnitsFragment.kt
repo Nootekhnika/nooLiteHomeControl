@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.noolitef.PRF64
 import com.noolitef.R
+import com.noolitef.settings.Settings
 
 
 class AutomationUnitsFragment : DialogFragment(), View.OnClickListener, IAutomationUnit {
@@ -82,11 +83,19 @@ class AutomationUnitsFragment : DialogFragment(), View.OnClickListener, IAutomat
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return initView(
-                inflater.inflate(
-                        R.layout.fragment_automation_units, container, false
-                )
-        )
+        if (Settings.isNightMode()) {
+            return initView(
+                    inflater.inflate(
+                            R.layout.fragment_automation_units_dark, container, false
+                    )
+            )
+        } else {
+            return initView(
+                    inflater.inflate(
+                            R.layout.fragment_automation_units, container, false
+                    )
+            )
+        }
     }
 
     override fun onStart() {

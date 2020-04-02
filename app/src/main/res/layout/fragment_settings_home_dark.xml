@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_dark"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_settings_home_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:drawableLeft="@drawable/ic_arrow_left_grey"
+            android:paddingLeft="@dimen/dp_11"
+            android:text="Назад"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_settings_home_button_save"
+            android:layout_toRightOf="@id/fragment_settings_home_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Настройки"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_settings_home_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/grey_800"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дом"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/fragment_settings_home_progress_bar_update"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:theme="@style/NooLiteProgressBarGrey"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_96"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Название"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/fragment_settings_home_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/edit_text_background_grey"
+            android:maxLength="64"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_8"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:background="@color/grey_800" />
+
+    <Button
+        android:id="@+id/fragment_settings_home_button_ip_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_16"
+        android:background="@drawable/button_grey"
+        android:drawableRight="@drawable/ic_arrow_right_grey"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_13"
+        android:text="IP адрес"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/grey"
+        android:textStyle="normal"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/fragment_settings_home_button_authorization"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:background="@drawable/button_grey"
+        android:drawableRight="@drawable/ic_arrow_right_grey"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_13"
+        android:text="Авторизация"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/grey"
+        android:textStyle="normal"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/fragment_settings_home_button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:background="@drawable/button_grey"
+            android:text="Удалить дом"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

@@ -85,7 +85,12 @@ public class SettingsHomeFragment extends DialogFragment implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_settings_home, null);
+        View fragmentView;
+        if (Settings.isNightMode()) {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_home_dark, null);
+        } else {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_home, null);
+        }
         buttonBack = (Button) fragmentView.findViewById(R.id.fragment_settings_home_button_back);
         buttonBack.setOnClickListener(this);
         buttonSave = (Button) fragmentView.findViewById(R.id.fragment_settings_home_button_save);

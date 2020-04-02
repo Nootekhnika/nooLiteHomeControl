@@ -161,8 +161,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.setCanceledOnTouchOutside(true)
+        if (Settings.isNightMode()) {
+            return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx_dark, null))
+        } else {
+            return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx, null))
+        }
 
-        return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx, null))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

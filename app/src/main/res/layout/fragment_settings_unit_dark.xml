@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_dark"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_settings_unit_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:drawableLeft="@drawable/ic_arrow_left_grey"
+            android:paddingLeft="@dimen/dp_11"
+            android:text="Назад"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/fragment_settings_unit_button_save"
+            android:layout_toRightOf="@id/fragment_settings_unit_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Настройки"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/fragment_settings_unit_button_save"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:text="Сохранить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/grey_800"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Настройка  "
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fragment_settings_unit_text_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Название"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/fragment_settings_unit_edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/edit_text_background_grey"
+                    android:imeOptions="actionDone"
+                    android:maxLength="32"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_room_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Расположение"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/edit_text_background_grey">
+
+                    <Spinner
+                        android:id="@+id/fragment_settings_unit_spinner_room"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_device_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_10"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Тип устройства"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@drawable/edit_text_background_grey">
+
+                    <Spinner
+                        android:id="@+id/fragment_settings_unit_spinner_device_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_28" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/fragment_settings_unit_text_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Адрес устройства"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fragment_settings_unit_edit_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_28"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@drawable/edit_text_background_grey"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey_dark"
+                    android:textIsSelectable="true"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_invert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_8"
+                android:paddingRight="@dimen/dp_16"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/fragment_settings_unit_checkbox_invert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="инвертировать открыть/закрыть"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold"
+                    android:theme="@style/NooLiteCheckBoxStyleGrey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Другие настройки"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_others"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:drawableRight="@drawable/ic_arrow_right_grey"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_13"
+                    android:text="Перейти"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_settings_unit_layout_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Датчик"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_sensor"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:drawableRight="@drawable/ic_arrow_right_grey"
+                    android:gravity="center|left"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_13"
+                    android:text="Выбрать"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1_5"
+                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_6"
+                android:background="@color/grey_800" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingBottom="@dimen/dp_10">
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_binding_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="РЕЖИМ  ПРИВЯЗКИ"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_unbinding_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="РЕЖИМ  ОТВЯЗКИ"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_service_mode_on"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="ВКЛЮЧИТЬ СЕРВИСНЫЙ  РЕЖИМ"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_service_mode_off"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="ВЫКЛЮЧИТЬ СЕРВИСНЫЙ  РЕЖИМ"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_boot_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="BOOT MODE"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/fragment_settings_unit_button_remove"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/button_grey"
+                    android:focusable="false"
+                    android:text="УДАЛИТЬ"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/grey"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/fragment_settings_unit_layout_unbind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/fragment_settings_unit_text_instructions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Инструкции"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/fragment_settings_unit_button_unbind"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/button_grey"
+                        android:focusable="false"
+                        android:text="ОТВЯЗАТЬ"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_settings_unit_layout_tx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/fragment_settings_unit_text_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Проверьте статус блока кнопкой ''ПЕРЕКЛЮЧИТЬ''"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/fragment_settings_unit_button_switch"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/button_grey"
+                        android:focusable="false"
+                        android:text="ПЕРЕКЛЮЧИТЬ"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/fragment_settings_unit_text_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Удалите блок из памяти контроллера"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/fragment_settings_unit_button_delete"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/button_grey"
+                        android:focusable="false"
+                        android:text="УДАЛИТЬ  ИЗ  ПАМЯТИ  КОНТРОЛЛЕРА"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/grey"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

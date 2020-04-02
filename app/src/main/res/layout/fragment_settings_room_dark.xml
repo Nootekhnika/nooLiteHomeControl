@@ -11,10 +11,9 @@
         android:background="@color/black_light">
 
         <Button
-            android:id="@+id/fragment_preset_button_cancel"
+            android:id="@+id/fragment_settings_room_button_cancel"
             android:layout_width="@dimen/dp_88"
             android:layout_height="@dimen/dp_48"
-            android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/dp_16"
             android:background="@drawable/button_grey"
             android:text="Отменить"
@@ -23,22 +22,22 @@
             android:textStyle="normal" />
 
         <TextView
-            android:id="@+id/fragment_preset_title"
-            android:layout_width="match_parent"
+            android:id="@+id/fragment_settings_room_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/fragment_preset_button_save"
-            android:layout_toRightOf="@id/fragment_preset_button_cancel"
+            android:layout_toLeftOf="@id/fragment_settings_room_button_save"
+            android:layout_toRightOf="@id/fragment_settings_room_button_cancel"
             android:ellipsize="marquee"
             android:gravity="center"
             android:singleLine="true"
-            android:text="Добавление"
+            android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/grey"
             android:textStyle="normal" />
 
         <Button
-            android:id="@+id/fragment_preset_button_save"
+            android:id="@+id/fragment_settings_room_button_save"
             android:layout_width="@dimen/dp_88"
             android:layout_height="@dimen/dp_48"
             android:layout_alignParentRight="true"
@@ -52,72 +51,57 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_16"
-        android:orientation="vertical">
+        android:layout_height="@dimen/dp_96"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_12"
-            android:text="Название сценария"
+            android:text="Название комнаты"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/grey"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/fragment_preset_edit_name"
+            android:id="@+id/fragment_settings_room_edit_name"
             android:layout_width="match_parent"
             android:layout_height="28dp"
             android:layout_marginTop="@dimen/dp_8"
-            android:layout_marginBottom="@dimen/dp_16"
             android:background="@drawable/edit_text_background_grey"
-            android:imeOptions="actionDone"
             android:maxLength="31"
-            android:paddingLeft="@dimen/dp_6"
-            android:paddingRight="@dimen/dp_6"
+            android:paddingLeft="@dimen/dp_8"
+            android:paddingRight="@dimen/dp_8"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/grey"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
-            android:background="@drawable/shadow_bottom" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fragment_preset_recycler_view_rooms_devices"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scrollbars="vertical" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/fragment_preset_layout_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey_800"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/fragment_preset_button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="@dimen/dp_16"
-            android:layout_marginRight="@dimen/dp_16"
-            android:background="@drawable/button_grey"
-            android:text="Удалить сценарий"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/grey"
             android:textStyle="normal" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1_5"
+        android:background="@color/grey_800" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/fragment_settings_room_button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:text="Удалить комнату"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal"
+            android:visibility="invisible" />
+    </RelativeLayout>
 </LinearLayout>

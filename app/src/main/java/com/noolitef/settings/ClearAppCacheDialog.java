@@ -48,7 +48,12 @@ public class ClearAppCacheDialog extends DialogFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
         getDialog().getWindow().setBackgroundDrawableResource(R.color.transparent);
-        View dialog = inflater.inflate(R.layout.dialog_clear_cache, null);
+        View dialog;
+        if (Settings.isNightMode()){
+            dialog = inflater.inflate(R.layout.dialog_clear_cache_dark, null);
+        } else {
+            dialog = inflater.inflate(R.layout.dialog_clear_cache, null);
+        }
         clearButton = (Button) dialog.findViewById(R.id.dialog_clear_cache_button_confirm);
         clearButton.setOnClickListener(this);
         cancelButton = (Button) dialog.findViewById(R.id.dialog_clear_cache_button_cancel);

@@ -61,7 +61,12 @@ public class SettingsControllerFragment extends DialogFragment implements View.O
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_settings_controller, null);
+        View fragmentView;
+        if (Settings.isNightMode()) {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller_dark, null);
+        } else {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller, null);
+        }
         layoutPRF = fragmentView.findViewById(R.id.fragment_settings_controller_layout_prf);
         layoutPRF.setOnClickListener(this);
         buttonBack = (Button) fragmentView.findViewById(R.id.fragment_settings_controller_button_back);

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.noolitef.settings.Settings;
 import com.noolitef.tx.PowerUnit;
 
 import java.util.ArrayList;
@@ -94,7 +95,12 @@ public class BindFragment_temporary extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_bind_temporary, null);
+        View fragmentView;
+                if ( Settings.isNightMode()) {
+                    fragmentView = inflater.inflate(R.layout.fragment_bind_temporary_dark, null);
+                } else {
+                    fragmentView = inflater.inflate(R.layout.fragment_bind_temporary, null);
+                }
 
         buttonBack = (Button) fragmentView.findViewById(R.id.fragment_bind_button_back);
         buttonBack.setOnClickListener(new View.OnClickListener() {

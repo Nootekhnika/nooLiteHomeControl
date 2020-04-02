@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_dark"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/black_light">
+
+        <Button
+            android:id="@+id/fragment_bind_button_back"
+            android:layout_width="@dimen/dp_88"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:background="@drawable/button_grey"
+            android:text="Отменить"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_104"
+            android:layout_toRightOf="@id/fragment_bind_button_back"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="Добавление"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/grey"
+            android:textStyle="normal" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Тип устройства:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/fragment_bind_spinner_unit_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/fragment_bind_text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Название:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/fragment_bind_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="введите название..."
+                android:maxLength="31"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/grey"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_text_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Комната:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/fragment_bind_spinner_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_text_device_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Тип блока:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/fragment_bind_spinner_device_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_text_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Канал:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/fragment_bind_spinner_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/fragment_bind_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_grey"
+                android:text="ПРИВЯЗАТЬ"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/fragment_bind_button_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_grey"
+                android:text="ПЕРЕКЛЮЧИТЬ"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fragment_bind_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/fragment_bind_button_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_grey"
+                android:text="СОХРАНИТЬ"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/grey"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <ProgressBar
+                android:id="@+id/fragment_bind_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:layout_marginTop="@dimen/dp_8"
+                android:theme="@style/NooLiteProgressBarDark"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

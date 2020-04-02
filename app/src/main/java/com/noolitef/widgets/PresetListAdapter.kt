@@ -9,6 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.noolitef.R
 import com.noolitef.presets.Preset
+import com.noolitef.settings.Settings
 
 
 class PresetListAdapter(
@@ -61,24 +62,46 @@ class PresetListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return when (viewType) {
-            HOME_ACTIVITY -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item_home_activity, parent, false)
-                HomeActivityViewHolder(view)
+        if (Settings.isNightMode()) {
+            return when (viewType) {
+                HOME_ACTIVITY -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item_home_activity_dark, parent, false)
+                    HomeActivityViewHolder(view)
+                }
+                PRESET -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item, parent, false)
+                    PresetViewHolder(view)
+                }
+                FOOTER -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
+                    FooterViewHolder(view)
+                }
+                else -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
+                    FooterViewHolder(view)
+                }
             }
-            PRESET -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item, parent, false)
-                PresetViewHolder(view)
-            }
-            FOOTER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
-                FooterViewHolder(view)
-            }
-            else -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
-                FooterViewHolder(view)
+        } else {
+            return when (viewType) {
+                HOME_ACTIVITY -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item_home_activity, parent, false)
+                    HomeActivityViewHolder(view)
+                }
+                PRESET -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_preset_list_item, parent, false)
+                    PresetViewHolder(view)
+                }
+                FOOTER -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
+                    FooterViewHolder(view)
+                }
+                else -> {
+                    val view = LayoutInflater.from(parent.context).inflate(R.layout.card_view_list_item_footer, parent, false)
+                    FooterViewHolder(view)
+                }
             }
         }
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

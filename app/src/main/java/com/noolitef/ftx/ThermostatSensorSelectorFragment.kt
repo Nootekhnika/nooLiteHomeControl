@@ -56,7 +56,11 @@ class ThermostatSensorSelectorFragment : DialogFragment(), View.OnClickListener,
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog.setCanceledOnTouchOutside(true)
 
-        val dialogView = inflater.inflate(R.layout.fragment_settings_thermostat_sensors, null)
+        val dialogView = if (Settings.isNightMode()) {
+            inflater.inflate(R.layout.fragment_settings_thermostat_sensors_dark, null)
+        } else {
+            inflater.inflate(R.layout.fragment_settings_thermostat_sensors, null)
+        }
         buttonBack = dialogView.findViewById(R.id.fragment_settings_thermostat_sensors_button_back)
         buttonBack.setOnClickListener(this)
         buttonSave = dialogView.findViewById(R.id.fragment_settings_thermostat_sensors_button_save)

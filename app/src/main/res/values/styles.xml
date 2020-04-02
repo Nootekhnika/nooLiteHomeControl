@@ -16,6 +16,10 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
+    <style name="NooLiteProgressBarGrey" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/grey</item>
+    </style>
+
     <style name="NooLiteSwitchCompatStyle" parent="Theme.AppCompat">
         <item name="thumbTint">@color/switch_thumb_color</item>
         <item name="trackTint">@color/switch_track_color</item>
@@ -23,6 +27,11 @@
 
     <style name="NooLiteRadioButtonStyle" parent="Theme.AppCompat">
         <item name="colorControlActivated">@color/black_light</item>
+        <item name="colorControlNormal">@color/grey</item>
+    </style>
+
+    <style name="NooLiteRadioButtonStyleGrey" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/grey</item>
         <item name="colorControlNormal">@color/grey</item>
     </style>
 
