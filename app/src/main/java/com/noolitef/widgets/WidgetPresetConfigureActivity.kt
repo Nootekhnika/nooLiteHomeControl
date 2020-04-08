@@ -79,7 +79,11 @@ class WidgetPresetConfigureActivity : Activity(), View.OnClickListener {
         presets = nooLitePRF64.getPresets()
 
         setResult(Activity.RESULT_CANCELED)
-        setContentView(R.layout.widget_configure_activity_preset)
+        if (Settings.isNightMode()) {
+            setContentView(R.layout.widget_configure_activity_preset_dark)
+        } else {
+            setContentView(R.layout.widget_configure_activity_preset)
+        }
 
         buttonCancel = findViewById(R.id.widget_configure_activity_button_cancel)
         buttonCancel.setOnClickListener(this)

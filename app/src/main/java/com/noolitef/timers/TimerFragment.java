@@ -151,7 +151,12 @@ public class TimerFragment extends DialogFragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragment = inflater.inflate(R.layout.fragment_timer, null);
+        View fragment;
+        if (Settings.isNightMode()) {
+            fragment = inflater.inflate(R.layout.fragment_timer_dark, null);
+        } else {
+            fragment = inflater.inflate(R.layout.fragment_timer, null);
+        }
 
         cancelButton = (Button) fragment.findViewById(R.id.fragment_timer_button_cancel);
         cancelButton.setOnClickListener(this);
