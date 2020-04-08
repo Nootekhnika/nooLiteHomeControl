@@ -72,7 +72,12 @@ public class SettingsControllerAuthorizationFragment extends DialogFragment impl
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setCanceledOnTouchOutside(true);
-        View fragmentView = inflater.inflate(R.layout.fragment_settings_controller_authorization, null);
+        View fragmentView;
+        if (Settings.isNightMode()) {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller_authorization_dark, null);
+        } else {
+            fragmentView = inflater.inflate(R.layout.fragment_settings_controller_authorization, null);
+        }
         buttonBack = (Button) fragmentView.findViewById(R.id.fragment_settings_controller_authorization_button_back);
         buttonBack.setOnClickListener(this);
         buttonSave = (Button) fragmentView.findViewById(R.id.fragment_settings_controller_authorization_button_save);
