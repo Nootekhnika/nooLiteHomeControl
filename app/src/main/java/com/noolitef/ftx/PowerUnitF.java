@@ -9,14 +9,14 @@ public class PowerUnitF {
     private String id;
     private int index;
     private int presetState;
-    private int presetBrightness;
+    protected int presetBrightness;
     private int state;
     private int roomID;
     private String room;
     private String name;
     private boolean dimmer;
     private int brightness;
-    private byte[] command = {2, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    protected byte[] command = {2, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private boolean preset;
     private int adapterPosition;
 

@@ -6,12 +6,12 @@ import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
 import com.noolitef.ftx.RolletUnitF;
 import com.noolitef.presets.Preset;
+import com.noolitef.rx.GraphLogListener;
 import com.noolitef.rx.HumidityTemperatureSensor;
 import com.noolitef.rx.HumidityTemperatureUnit;
 import com.noolitef.rx.LeakDetector;
 import com.noolitef.rx.LightSensor;
 import com.noolitef.rx.ListLogListener;
-import com.noolitef.rx.GraphLogListener;
 import com.noolitef.rx.MotionSensor;
 import com.noolitef.rx.OpenCloseSensor;
 import com.noolitef.rx.RemoteController;
@@ -2375,7 +2375,7 @@ public class NooLiteF {
             response.close();
             call.cancel();
             updating = false;
-            bindListener.onFailure("Ошибка проверки привязки");
+            bindListener.onFailure("Ошибка соединения при проверке привязки");
         }
     }
 
@@ -2398,7 +2398,7 @@ public class NooLiteF {
             response.close();
             call.cancel();
             updating = false;
-            bindListener.onFailure("Ошибка соединения при сохранении устройства");
+            bindListener.onFailure("Устройство привязано, но не сохранено в памяти контроллера");
         } else {
             response.close();
             call.cancel();

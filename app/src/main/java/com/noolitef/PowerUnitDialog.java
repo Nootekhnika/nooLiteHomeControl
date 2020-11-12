@@ -25,6 +25,7 @@ import com.noolitef.customview.PercentageSeekBar;
 import com.noolitef.ftx.FTXUnitSettingsFragment;
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
+import com.noolitef.ftx.PowerUnitFA;
 import com.noolitef.ftx.RolletUnitF;
 import com.noolitef.settings.Settings;
 import com.noolitef.tx.PowerUnit;
@@ -114,8 +115,18 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
 
     public void setBrightness(int percent) {
         if (seekLayout.getVisibility() == View.VISIBLE) {
-            //showToast("Яркость: " + percent + "%");
-            seekBrightness.setProgress(percent);
+            if (!(powerUnitF instanceof PowerUnitFA)) {
+                seekBrightness.setProgress(percent);
+            }
+        }
+    }
+
+    public void setRawData(int percent) {
+        if (seekLayout.getVisibility() == View.VISIBLE) {
+            if (powerUnitF instanceof PowerUnitFA) {
+                seekBrightness.setProgress(percent);
+                powerUnitF.setBrightness(percent);
+            }
         }
     }
 
@@ -273,10 +284,19 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
                 sendCommand(String.format(Locale.ROOT, "00000000%s0601%s00000000000000", NooLiteF.getHexString(channel), NooLiteF.getHexString((int) (seekBar.getProgress() * 1.09 + 43.5))));
         }
         if (powerUnitF != null) {
+            String format;
+            int brightness;
+            if (powerUnitF instanceof PowerUnitFA) {
+                format = "01";
+                brightness = seekBar.getProgress();
+            } else {
+                format = "00";
+                brightness = (int) (seekBar.getProgress() * 2.55 + .5);
+            }
             if (seekBar.getProgress() != 0)
-                sendCommand(String.format(Locale.ROOT, "00020800000600%s000000%s", NooLiteF.getHexString((int) (seekBar.getProgress() * 2.55 + .5)), powerUnitF.getId()));
+                sendCommand(String.format(Locale.ROOT, "000208000006%s%s000000%s", format, NooLiteF.getHexString(brightness), powerUnitF.getId()));
             else
-                sendCommand(String.format(Locale.ROOT, "0002080000060001000000%s", powerUnitF.getId())); //zero percent to one
+                sendCommand(String.format(Locale.ROOT, "000208000006%s01000000%s", format, powerUnitF.getId())); //zero percent to one
         }
     }
 

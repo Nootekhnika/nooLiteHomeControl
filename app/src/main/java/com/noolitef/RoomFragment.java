@@ -539,8 +539,10 @@ public class RoomFragment extends Fragment {
                     @Override
                     public void run() {
                         unitsRecyclerAdapter.notifyItemChanged(position);
-                        if (powerUnitDialog != null && powerUnitDialog.isAdded())
+                        if (powerUnitDialog != null && powerUnitDialog.isAdded()) {
                             powerUnitDialog.setBrightness(brightness);
+                            powerUnitDialog.setRawData(temperature);
+                        }
                         if (thermostatDialog != null && thermostatDialog.isAdded())
                             thermostatDialog.setCurrentTemperature(temperature);
                     }

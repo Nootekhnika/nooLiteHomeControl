@@ -25,6 +25,7 @@ import com.noolitef.Thermostat;
 import com.noolitef.ThermostatDialog;
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
+import com.noolitef.ftx.PowerUnitFA;
 import com.noolitef.ftx.RolletUnitF;
 import com.noolitef.settings.Settings;
 import com.noolitef.tx.PowerUnit;
@@ -903,7 +904,11 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         for (int i = 0; i < 73; i++) {
             if ((NooLiteF.getHexString(preset.getCommand(i)[10] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[11] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[12] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[13] & 0xFF))))).equals(powerUnitF.getId())) {
                 powerUnitF.setPresetState(preset.getCommand(i)[4]);
-                powerUnitF.setPresetBrightness((int) ((double) (preset.getCommand(i)[6] & 0xFF) / 255 * 100 + .5));
+                if (powerUnitF instanceof PowerUnitFA) {
+                    powerUnitF.setPresetBrightness(preset.getCommand(i)[6] & 0xFF);
+                } else {
+                    powerUnitF.setPresetBrightness((int) ((double) (preset.getCommand(i)[6] & 0xFF) / 255 * 100 + .5));
+                }
                 return true;
             }
         }
