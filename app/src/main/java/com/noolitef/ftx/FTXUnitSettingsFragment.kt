@@ -1525,7 +1525,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                         currentDimmingState = newDimmingState
                         newNooLiteState = mainSettingsByteString.substring(5, 6).toInt()
                         currentNooLiteState = newNooLiteState
-                        newExternalInputState = mainSettingsByteString.substring(3, 5).toInt()
+                        newExternalInputState = mainSettingsByteString.substring(3, 5).toInt(2)
                         currentExternalInputState = newExternalInputState
                         newPowerUpState = mainSettingsByteString.substring(2, 3).toInt()
                         currentPowerUpState = newPowerUpState
