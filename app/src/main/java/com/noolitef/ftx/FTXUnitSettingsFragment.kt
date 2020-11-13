@@ -302,6 +302,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 } else {
                     (progress * 2.55 + .5).toInt()
                 }
+                if (newSwitchOnLevel == 0) {
+                    newSwitchOnLevel = 1
+                    seekSwitchOnLevel.progress = newSwitchOnLevel
+                }
 
                 if (newSwitchOnLevel < newLowerDimmingLevel) {
                     newLowerDimmingLevel = newSwitchOnLevel
@@ -343,6 +347,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
         } else {
             rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+        }
+        if (newLowerDimmingLevel == 0) {
+            newLowerDimmingLevel = 1
+            rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, minUpperDimmingLevel)
         }
 
         if (newLowerDimmingLevel > newSwitchOnLevel) {
