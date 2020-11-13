@@ -352,6 +352,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             newLowerDimmingLevel = 1
             rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, minUpperDimmingLevel)
         }
+        if (newLowerDimmingLevel > 50) {
+            newLowerDimmingLevel = 50
+            rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, minUpperDimmingLevel)
+        }
 
         if (newLowerDimmingLevel > newSwitchOnLevel) {
             newSwitchOnLevel = newLowerDimmingLevel
