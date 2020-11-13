@@ -237,6 +237,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             R.id.fragment_settings_unit_ftx_checkbox_power_up_state -> {
                 newPowerUpState =
                         if (checked) {
+                            checkRememberState.isChecked = false
                             1
                         } else {
                             0
@@ -245,6 +246,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             R.id.fragment_settings_unit_ftx_checkbox_remember_state -> {
                 newRememberState =
                         if (checked) {
+                            checkPowerUpState.isChecked = false
                             1
                         } else {
                             0
