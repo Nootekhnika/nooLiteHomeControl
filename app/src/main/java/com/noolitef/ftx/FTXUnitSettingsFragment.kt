@@ -302,6 +302,15 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 } else {
                     (progress * 2.55 + .5).toInt()
                 }
+
+                if (newSwitchOnLevel < newLowerDimmingLevel) {
+                    newLowerDimmingLevel = newSwitchOnLevel
+                    rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                }
+                if (newSwitchOnLevel > newUpperDimmingLevel) {
+                    newUpperDimmingLevel = newSwitchOnLevel
+                    rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                }
             }
             R.id.fragment_settings_unit_ftx_seek_switch_on_brightness -> {
                 newSwitchOnBrightness = if (powerUnitF is PowerUnitFA) {
@@ -334,6 +343,15 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
         } else {
             rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+        }
+
+        if (newLowerDimmingLevel > newSwitchOnLevel) {
+            newSwitchOnLevel = newLowerDimmingLevel
+            seekSwitchOnLevel.progress = newSwitchOnLevel
+        }
+        if (newUpperDimmingLevel < newSwitchOnLevel) {
+            newSwitchOnLevel = newUpperDimmingLevel
+            seekSwitchOnLevel.progress = newSwitchOnLevel
         }
     }
 
