@@ -414,6 +414,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         layoutSwitchOnBrightness = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_switch_on_brightness)
         seekSwitchOnBrightness = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_seek_switch_on_brightness)
         seekSwitchOnBrightness.setOnSeekBarChangeListener(this)
+        if (powerUnitF is PowerUnitFA) {
+            seekSwitchOnBrightness.isEnabled = false
+        }
         // external input state
         progressExternalInputState = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_progress_external_input_state)
         imageExternalInputStateWarning = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_external_input_state)
