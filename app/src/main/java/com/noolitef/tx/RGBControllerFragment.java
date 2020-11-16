@@ -120,7 +120,7 @@ public class RGBControllerFragment extends DialogFragment implements View.OnClic
         buttonChooseColor.setOnClickListener(this);
         buttonChooseColor.setOnLongClickListener(this);
         dimmer = fragmentView.findViewById(R.id.fragment_rgb_controller_dimmer);
-        dimmer.setTextColor(R.color.grey);
+        dimmer.setTextColor(R.color.black_light);
         dimmer.setOnSeekBarChangeListener(this);
         buttonSwitchMode = fragmentView.findViewById(R.id.fragment_rgb_controller_button_switch_mode);
         buttonSwitchMode.setOnClickListener(this);
