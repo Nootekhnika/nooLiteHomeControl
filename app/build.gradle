@@ -8,7 +8,7 @@ android {
         applicationId 'com.noolitef'
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 20201112
+        versionCode 20201117
         versionName '0.9.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
