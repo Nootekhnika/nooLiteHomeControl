@@ -814,6 +814,143 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/fragment_settings_unit_ftx_progress_transmitter_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@color/grey"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:text="Настройка трансивера"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp">
+
+                    <ProgressBar
+                        android:id="@+id/fragment_settings_unit_ftx_progress_transmitter_sensitivity"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:theme="@style/NooLiteProgressBarDark"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:id="@+id/fragment_settings_unit_ftx_layout_transmitter_sensitivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:ellipsize="marquee"
+                                android:singleLine="true"
+                                android:text="Чувствительность приемника"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RadioGroup
+                            android:id="@+id/fragment_settings_unit_ftx_group_transmitter_sensitivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="16dp"
+                            android:paddingBottom="16dp">
+
+                            <!-- "0 дБ" -->
+                            <RadioButton
+                                android:id="@+id/fragment_settings_unit_ftx_radio_transmitter_sensitivity_0"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="0 дБ"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal"
+                                android:theme="@style/NooLiteRadioButtonStyle" />
+
+                            <!-- "6 дБ" -->
+                            <RadioButton
+                                android:id="@+id/fragment_settings_unit_ftx_radio_transmitter_sensitivity_6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="6 дБ"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal"
+                                android:theme="@style/NooLiteRadioButtonStyle" />
+
+                            <!-- "12 дБ" -->
+                            <RadioButton
+                                android:id="@+id/fragment_settings_unit_ftx_radio_transmitter_sensitivity_12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="12 дБ"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal"
+                                android:theme="@style/NooLiteRadioButtonStyle" />
+
+                            <!-- "18 дБ" -->
+                            <RadioButton
+                                android:id="@+id/fragment_settings_unit_ftx_radio_transmitter_sensitivity_18"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:text="18 дБ"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/black_light"
+                                android:textStyle="normal"
+                                android:theme="@style/NooLiteRadioButtonStyle" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/fragment_settings_unit_ftx_image_transmitter_sensitivity_warning"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_warning" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

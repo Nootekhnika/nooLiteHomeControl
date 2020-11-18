@@ -31,6 +31,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         private const val SEND_STATE = "82"
     }
 
+    // DEPENDENCIES
+
     // main
     private lateinit var homeActivity: HomeActivity
     private lateinit var powerUnitF: PowerUnitF
@@ -41,6 +43,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var call: Call
     private lateinit var response: Response
     private lateinit var sResponse: String
+
+    // DATA
 
     // main settings byte
     private var mainSettingsByteString = StringBuilder("00000000")
@@ -86,11 +90,17 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private var currentTemporaryOnState = -1
     private var newTemporaryOnState = -1
 
+    // transmitter sensitivity
+    private var currentTransmitterSensitivity = -1
+    private var newTransmitterSensitivity = -1
+
     // info
     private var deviceType = -1
     private var firmwareVersion = -1
     private var freeNooLiteMemoryCells = -1
     private var freeNooLiteFMemoryCells = -1
+
+    // VIEW
 
     // title
     private lateinit var buttonBack: Button
@@ -148,6 +158,16 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var checkNooLiteState: AppCompatCheckBox
     private lateinit var checkTemporaryOnState: AppCompatCheckBox
     private lateinit var imageLocksConfigWarning: ImageView
+
+    // transmitter sensitivity
+    private lateinit var layoutTransmitterSensitivity: LinearLayout
+    private lateinit var progressTransmitterSensitivity: ProgressBar
+    private lateinit var groupTransmitterSensitivity: RadioGroup
+    private lateinit var radioTransmitterSensitivity0: RadioButton
+    private lateinit var radioTransmitterSensitivity6: RadioButton
+    private lateinit var radioTransmitterSensitivity12: RadioButton
+    private lateinit var radioTransmitterSensitivity18: RadioButton
+    private lateinit var imageTransmitterSensitivity: ImageView
 
     // info
     private lateinit var textDeviceType: TextView
@@ -288,6 +308,18 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                         } else {
                             0
                         }
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_0 -> {
+                if (checked) newTransmitterSensitivity = 0
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_6 -> {
+                if (checked) newTransmitterSensitivity = 1
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_12 -> {
+                if (checked) newTransmitterSensitivity = 2
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_18 -> {
+                if (checked) newTransmitterSensitivity = 3
             }
         }
     }
@@ -448,6 +480,19 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         checkTemporaryOnState = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_checkbox_temporary_on_state)
         checkTemporaryOnState.setOnCheckedChangeListener(this)
         imageLocksConfigWarning = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_locks_config_warning)
+        // transmitter sensitivity
+        layoutTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_transmitter_sensitivity)
+        progressTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_progress_transmitter_sensitivity)
+        groupTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_group_transmitter_sensitivity)
+        radioTransmitterSensitivity0 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_0)
+        radioTransmitterSensitivity0.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity6 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_6)
+        radioTransmitterSensitivity6.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity12 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_12)
+        radioTransmitterSensitivity12.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity18 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_18)
+        radioTransmitterSensitivity18.setOnCheckedChangeListener(this)
+        imageTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_transmitter_sensitivity_warning)
         // info
         textDeviceType = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_text_info_device_type)
         textFirmwareVersion = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_text_info_firmware_version)
@@ -698,6 +743,35 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         }
     }
 
+    private fun showTransmitterSensitivity() {
+        if (!isAdded) return
+        homeActivity.runOnUiThread {
+            when (newTransmitterSensitivity) {
+                0 -> {
+                    radioTransmitterSensitivity0.isChecked = true
+                }
+                1 -> {
+                    radioTransmitterSensitivity6.isChecked = true
+                }
+                2 -> {
+                    radioTransmitterSensitivity12.isChecked = true
+                }
+                3 -> {
+                    radioTransmitterSensitivity18.isChecked = true
+                }
+            }
+            if (newTransmitterSensitivity == -1) {
+                progressTransmitterSensitivity.visibility = View.GONE
+                layoutTransmitterSensitivity.visibility = View.GONE
+                imageTransmitterSensitivity.visibility = View.VISIBLE
+            } else {
+                progressTransmitterSensitivity.visibility = View.GONE
+                imageTransmitterSensitivity.visibility = View.GONE
+                layoutTransmitterSensitivity.visibility = View.VISIBLE
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun showDeviceInfo() {
         if (!isAdded) return
@@ -760,7 +834,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     // GET
 
     private fun getSettings() {
-        Thread(Runnable {
+        Thread {
             try {
                 if (powerUnitF is PowerUnitFA) {
                     getInfo()
@@ -804,9 +878,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 showExternalInputState()
                 showRetransmissionSettings()
                 showLocksConfig()
+                if (powerUnitF is PowerUnitFA) {
+                    showTransmitterSensitivity()
+                }
                 showDeviceInfo()
             }
-        }).start()
+        }.start()
     }
 
     // SUF-1-300 SETTINGS
@@ -1165,10 +1242,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
 
     private fun postSettings() {
         blockUI()
-        Thread(Runnable {
+        Thread {
             try {
                 if (powerUnitF is PowerUnitFA) {
-                    if (setMainSettingsByte()) {
+                    val setD0 = setMainSettingsByte()
+                    val setD1 = setAdditionalSettingsByte()
+                    if (setD0 || setD1) {
                         if (!postMainSettings()) throw ConnectException("ConnectException in postMainSettings()")
                         Thread.sleep(200)
                     }
@@ -1212,7 +1291,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 homeActivity.writeAppLog("FTXUnitSettings.kt : setSettings()" + "\n" + e.toString() + "\n" + NooLiteF.getStackTrace(e))
                 showToast(homeActivity.getString(R.string.some_thing_went_wrong))
             }
-        }).start()
+        }.start()
     }
 
     // set main settings byte
@@ -1245,6 +1324,15 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         }
         if (currentRememberState != newRememberState) {
             mainSettingsByteString.replace(7, 8, newRememberState.toString())
+            post = true
+        }
+        return post
+    }
+
+    private fun setAdditionalSettingsByte(): Boolean {
+        var post = false
+        if (currentTransmitterSensitivity != newTransmitterSensitivity) {
+            additionSettingsByteString.replace(6, 8, String.format("%2s", Integer.toBinaryString(newTransmitterSensitivity)).replace(' ', '0'))
             post = true
         }
         return post
@@ -1540,6 +1628,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                         currentTemporaryOnState = newTemporaryOnState
 
                         additionSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(16, 18).toInt(16))).replace(' ', '0'))
+                        newTransmitterSensitivity = additionSettingsByteString.substring(6).toInt(2)
+                        currentTransmitterSensitivity = newTransmitterSensitivity
 
                         return
                     }
