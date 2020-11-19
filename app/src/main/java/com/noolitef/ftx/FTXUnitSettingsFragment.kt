@@ -160,6 +160,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var imageLocksConfigWarning: ImageView
 
     // transmitter sensitivity
+    private lateinit var layoutTransmitterSettings: LinearLayout
     private lateinit var layoutTransmitterSensitivity: LinearLayout
     private lateinit var progressTransmitterSensitivity: ProgressBar
     private lateinit var groupTransmitterSensitivity: RadioGroup
@@ -481,6 +482,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         checkTemporaryOnState.setOnCheckedChangeListener(this)
         imageLocksConfigWarning = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_locks_config_warning)
         // transmitter sensitivity
+        layoutTransmitterSettings = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_transmitter_settings)
+        if (powerUnitF is PowerUnitFA) {
+            layoutTransmitterSettings.visibility = View.VISIBLE
+        }
         layoutTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_transmitter_sensitivity)
         progressTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_progress_transmitter_sensitivity)
         groupTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_group_transmitter_sensitivity)
