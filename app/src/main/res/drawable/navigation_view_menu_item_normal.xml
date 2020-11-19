@@ -6,7 +6,7 @@
         android:top="-2dp">
         <shape>
             <padding android:left="@dimen/dp_16" />
-            <solid android:color="@android:color/transparent" />
+            <solid android:color="@android:color/white" />
             <stroke
                 android:width="@dimen/dp_1"
                 android:color="@color/grey" />

@@ -124,7 +124,7 @@
             android:textColor="@color/black_light"
             android:textStyle="normal" />
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/fragment_settings_controller_date_time_switch_automatically"
             style="@style/NooLiteSwitchCompatStyle"
             android:layout_width="wrap_content"

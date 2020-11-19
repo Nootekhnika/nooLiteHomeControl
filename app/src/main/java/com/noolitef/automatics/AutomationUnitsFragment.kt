@@ -1,15 +1,16 @@
 package com.noolitef.automatics
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.noolitef.PRF64
 import com.noolitef.R
 
@@ -133,7 +134,7 @@ class AutomationUnitsFragment : DialogFragment(), View.OnClickListener, IAutomat
 
     private fun setupWindow() {
 
-        val window = dialog.window
+        val window = dialog?.window
 
         val dialogParams = window?.attributes
         dialogParams?.dimAmount = 0.75f

@@ -142,7 +142,7 @@
                         android:gravity="center"
                         android:paddingTop="@dimen/dp_2">
 
-                        <android.support.v7.widget.SwitchCompat
+                        <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/fragment_thermostat_switch_state"
                             style="@style/NooLiteSwitchCompatStyle"
                             android:layout_width="wrap_content"

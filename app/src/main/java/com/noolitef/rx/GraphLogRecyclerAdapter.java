@@ -1,7 +1,7 @@
 package com.noolitef.rx;
 
 import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +9,6 @@ import android.widget.ImageView;
 
 import com.noolitef.NooLiteF;
 import com.noolitef.R;
-import com.noolitef.rx.EmptyTimeInterval;
-import com.noolitef.rx.HumidityTemperatureTimeInterval;
-import com.noolitef.rx.TemperatureTimeInterval;
 
 import java.util.ArrayList;
 

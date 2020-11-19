@@ -9,18 +9,6 @@ import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -33,6 +21,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.noolitef.automatics.AutomaticsFragment;
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
@@ -472,7 +473,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void setupDrawer() {
         drawerLayout.setScrimColor(Color.argb(128, 0, 0, 0));
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            drawerLayout.setDrawerShadow(R.drawable.navigation_view_shadow, Gravity.START);
+            drawerLayout.setDrawerShadow(R.drawable.navigation_view_shadow, Gravity.LEFT);
         }
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
@@ -495,7 +496,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 roomIndex = menuItem.getItemId() - 1;
                 roomID = rooms.get(menuItem.getItemId() - 1).getId();
                 bottomNavigationView.setSelectedItemId(R.id.bottom_navigation_item_room);
-                drawerLayout.closeDrawer(Gravity.START);
+                drawerLayout.closeDrawer(Gravity.LEFT);
                 return true;
             }
         });
@@ -791,7 +792,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.burger_button:
-                drawerLayout.openDrawer(Gravity.START);
+                drawerLayout.openDrawer(Gravity.LEFT);
                 break;
             case R.id.menu_button:
                 switch (bottomNavigationView.getSelectedItemId()) {
@@ -836,8 +837,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START);
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
         } else {
             if (backPressed + 2000 > System.currentTimeMillis()) {
                 toast.cancel();

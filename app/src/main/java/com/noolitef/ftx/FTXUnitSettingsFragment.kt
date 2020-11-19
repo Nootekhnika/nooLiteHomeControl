@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.AppCompatCheckBox
-import android.support.v7.widget.SwitchCompat
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.DialogFragment
 import com.appyvet.materialrangebar.RangeBar
 import com.noolitef.GUIBlockFragment
 import com.noolitef.HomeActivity
@@ -202,7 +202,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.setCanceledOnTouchOutside(true)
+        dialog?.setCanceledOnTouchOutside(true)
 
         return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx, null))
     }
@@ -503,7 +503,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     private fun setupFragment() {
-        val fragmentWindow = dialog.window
+        val fragmentWindow = dialog?.window
         val dialogParams = fragmentWindow?.attributes
         dialogParams?.dimAmount = 0.75f
         fragmentWindow?.attributes = dialogParams
