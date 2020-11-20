@@ -338,17 +338,29 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     (progress * 2.55 + .5).toInt()
                 }
                 if (newSwitchOnLevel == 0) {
-                    newSwitchOnLevel = 1
-                    seekSwitchOnLevel.progress = newSwitchOnLevel
+                    newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+                        1
+                    } else {
+                        3
+                    }
+                    seekSwitchOnLevel.progress = 1
                 }
 
                 if (newSwitchOnLevel < newLowerDimmingLevel) {
                     newLowerDimmingLevel = newSwitchOnLevel
-                    rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                    if (powerUnitF is PowerUnitFA) {
+                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                    } else {
+                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+                    }
                 }
                 if (newSwitchOnLevel > newUpperDimmingLevel) {
                     newUpperDimmingLevel = newSwitchOnLevel
-                    rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                    if (powerUnitF is PowerUnitFA) {
+                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+                    } else {
+                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+                    }
                 }
             }
             R.id.fragment_settings_unit_ftx_seek_switch_on_brightness -> {
@@ -383,22 +395,40 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         } else {
             rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
         }
-        if (newLowerDimmingLevel == 0) {
-            newLowerDimmingLevel = 1
-            rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, minUpperDimmingLevel)
+        if (leftPinIndex == 0) {
+            minLowerDimmingLevel = 1
+            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+                minLowerDimmingLevel
+            } else {
+                (minLowerDimmingLevel * 2.55 + .5).toInt()
+            }
+            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
         }
-        if (newLowerDimmingLevel > 50) {
-            newLowerDimmingLevel = 50
-            rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, minUpperDimmingLevel)
+        if (leftPinIndex > 50) {
+            minLowerDimmingLevel = 50
+            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+                minLowerDimmingLevel
+            } else {
+                (minLowerDimmingLevel * 2.55 + .5).toInt()
+            }
+            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
         }
 
-        if (newLowerDimmingLevel > newSwitchOnLevel) {
-            newSwitchOnLevel = newLowerDimmingLevel
-            seekSwitchOnLevel.progress = newSwitchOnLevel
+        if (leftPinIndex > seekSwitchOnLevel.progress) {
+            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+                leftPinIndex
+            } else {
+                (leftPinIndex * 2.55 + .5).toInt()
+            }
+            seekSwitchOnLevel.progress = leftPinIndex
         }
-        if (newUpperDimmingLevel < newSwitchOnLevel) {
-            newSwitchOnLevel = newUpperDimmingLevel
-            seekSwitchOnLevel.progress = newSwitchOnLevel
+        if (rightPinIndex < seekSwitchOnLevel.progress) {
+            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+                rightPinIndex
+            } else {
+                (rightPinIndex * 2.55 + .5).toInt()
+            }
+            seekSwitchOnLevel.progress = rightPinIndex
         }
     }
 
