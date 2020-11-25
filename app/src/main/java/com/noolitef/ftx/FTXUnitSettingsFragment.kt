@@ -393,6 +393,17 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             minUpperDimmingLevel = rightPinIndex
             textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
         } else {
+            if (powerUnitF is PowerUnitFA) {
+                val pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
+                if (pivot < 11) {
+                    pivot == 11
+                }
+                if (pivot > 90) {
+                    pivot == 90
+                }
+                minLowerDimmingLevel = pivot - 10
+                minUpperDimmingLevel = pivot + 10
+            }
             rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
         }
         if (leftPinIndex == 0) {
@@ -1052,10 +1063,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
                         newLowerDimmingLevel = sResponse.substring(16, 18).toInt(16)
                         currentLowerDimmingLevel = newLowerDimmingLevel
-                        minLowerDimmingLevel = newLowerDimmingLevel
                         newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
                         currentUpperDimmingLevel = newUpperDimmingLevel
-                        minUpperDimmingLevel = newUpperDimmingLevel
                         showDimmingSettings()
                         return true
                     }
@@ -1704,10 +1713,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                         currentSwitchOnLevel = newSwitchOnLevel
                         newLowerDimmingLevel = sResponse.substring(18, 20).toInt(16)
                         currentLowerDimmingLevel = newLowerDimmingLevel
-                        minLowerDimmingLevel = newLowerDimmingLevel
                         newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
                         currentUpperDimmingLevel = newUpperDimmingLevel
-                        minUpperDimmingLevel = newUpperDimmingLevel
 
                         return
                     }
