@@ -1323,9 +1323,14 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     if (currentRetransmissionDelay != newRetransmissionDelay) {
                         if (!postRetransmissionDelay()) throw ConnectException("ConnectException in postRetransmissionDelay()")
                     }
+
+                    getDimmingState(true)
+                    getMemoryState(true)
+                    getExternalInputState(true)
+                    getRetransmissionState(true)
+                    getLocksConfig(true)
                 }
-                showToast("Настройки сохранены")
-                dismiss()
+                showToast("Настройки отправлены на устройство")
             } catch (ce: ConnectException) {
                 call.cancel()
                 homeActivity.writeAppLog("FTXUnitSettings.kt : setSettings()" + "\n" + ce.toString() + "\n" + NooLiteF.getStackTrace(ce))
@@ -1334,6 +1339,20 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 call.cancel()
                 homeActivity.writeAppLog("FTXUnitSettings.kt : setSettings()" + "\n" + e.toString() + "\n" + NooLiteF.getStackTrace(e))
                 showToast(homeActivity.getString(R.string.some_thing_went_wrong))
+            } finally {
+                showSwitchOnLevelSettings()
+                showDimmingSettings()
+                showMemoryStateSettings()
+                showSwitchOnBrightnessSettings()
+                showExternalInputState()
+                showRetransmissionSettings()
+                showLocksConfig()
+                if (powerUnitF is PowerUnitFA) {
+                    showTransmitterSensitivity()
+                }
+                showDeviceInfo()
+
+                unblockUI()
             }
         }.start()
     }
@@ -1410,9 +1429,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0') == mainSettingsByteString.toString()) {
+                        mainSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0'))
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1449,9 +1468,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newUpperDimmingLevel && sResponse.substring(16, 18).toInt(16) == newLowerDimmingLevel) {
+                        newLowerDimmingLevel = sResponse.substring(16, 18).toInt(16)
+                        currentLowerDimmingLevel = newLowerDimmingLevel
+                        newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
+                        currentUpperDimmingLevel = newUpperDimmingLevel
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1488,9 +1510,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newSwitchOnLevel) {
+                        newSwitchOnLevel = sResponse.substring(14, 16).toInt(16)
+                        currentSwitchOnLevel = newSwitchOnLevel
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1527,9 +1550,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newRetransmissionDelay) {
+                        newRetransmissionDelay = sResponse.substring(14, 16).toInt(16)
+                        currentRetransmissionDelay = newRetransmissionDelay
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1566,9 +1590,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newSwitchOnBrightness) {
+                        newSwitchOnBrightness = sResponse.substring(16, 18).toInt(16)
+                        currentSwitchOnBrightness = newSwitchOnBrightness
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1795,6 +1820,27 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        mainSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0'))
+
+                        newRememberState = mainSettingsByteString.substring(7).toInt()
+                        currentRememberState = newRememberState
+                        newDimmingState = mainSettingsByteString.substring(6, 7).toInt()
+                        currentDimmingState = newDimmingState
+                        newNooLiteState = mainSettingsByteString.substring(5, 6).toInt()
+                        currentNooLiteState = newNooLiteState
+                        newExternalInputState = mainSettingsByteString.substring(3, 5).toInt(2)
+                        currentExternalInputState = newExternalInputState
+                        newPowerUpState = mainSettingsByteString.substring(2, 3).toInt()
+                        currentPowerUpState = newPowerUpState
+                        newRetransmissionState = mainSettingsByteString.substring(1, 2).toInt()
+                        currentRetransmissionState = newRetransmissionState
+                        newTemporaryOnState = mainSettingsByteString.substring(0, 1).toInt()
+                        currentTemporaryOnState = newTemporaryOnState
+
+                        additionSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(16, 18).toInt(16))).replace(' ', '0'))
+                        newTransmitterSensitivity = additionSettingsByteString.substring(6).toInt(2)
+                        currentTransmitterSensitivity = newTransmitterSensitivity
+
                         return true
                     }
                 }
@@ -1830,6 +1876,13 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newSwitchOnLevel = sResponse.substring(16, 18).toInt(16)
+                        currentSwitchOnLevel = newSwitchOnLevel
+                        newLowerDimmingLevel = sResponse.substring(18, 20).toInt(16)
+                        currentLowerDimmingLevel = newLowerDimmingLevel
+                        newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
+                        currentUpperDimmingLevel = newUpperDimmingLevel
+
                         return true
                     }
                 }
@@ -1865,6 +1918,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newRetransmissionDelay = sResponse.substring(14, 16).toInt(16)
+                        currentRetransmissionDelay = newRetransmissionDelay
+
                         return true
                     }
                 }
