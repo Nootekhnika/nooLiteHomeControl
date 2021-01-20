@@ -202,7 +202,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dialog?.setCanceledOnTouchOutside(true)
 
         return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx, null))
@@ -394,12 +394,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
         } else {
             if (powerUnitF is PowerUnitFA) {
-                val pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
+                var pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
                 if (pivot < 11) {
-                    pivot == 11
+                    pivot = 11
                 }
                 if (pivot > 90) {
-                    pivot == 90
+                    pivot = 90
                 }
                 minLowerDimmingLevel = pivot - 10
                 minUpperDimmingLevel = pivot + 10
