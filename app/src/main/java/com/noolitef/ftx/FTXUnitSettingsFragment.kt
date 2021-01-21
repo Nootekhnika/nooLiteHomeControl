@@ -952,7 +952,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -995,7 +995,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1051,7 +1051,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1115,7 +1115,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1191,7 +1191,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1253,7 +1253,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1622,7 +1622,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1669,7 +1669,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1724,7 +1724,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1769,7 +1769,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1866,7 +1866,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1908,7 +1908,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
