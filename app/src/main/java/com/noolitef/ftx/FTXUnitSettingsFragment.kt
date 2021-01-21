@@ -346,22 +346,22 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     seekSwitchOnLevel.progress = 1
                 }
 
-                if (newSwitchOnLevel < newLowerDimmingLevel) {
-                    newLowerDimmingLevel = newSwitchOnLevel
-                    if (powerUnitF is PowerUnitFA) {
-                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
-                    } else {
-                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
-                    }
-                }
-                if (newSwitchOnLevel > newUpperDimmingLevel) {
-                    newUpperDimmingLevel = newSwitchOnLevel
-                    if (powerUnitF is PowerUnitFA) {
-                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
-                    } else {
-                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
-                    }
-                }
+//                if (newSwitchOnLevel < newLowerDimmingLevel) {
+//                    newLowerDimmingLevel = newSwitchOnLevel
+//                    if (powerUnitF is PowerUnitFA) {
+//                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+//                    } else {
+//                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+//                    }
+//                }
+//                if (newSwitchOnLevel > newUpperDimmingLevel) {
+//                    newUpperDimmingLevel = newSwitchOnLevel
+//                    if (powerUnitF is PowerUnitFA) {
+//                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+//                    } else {
+//                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+//                    }
+//                }
             }
             R.id.fragment_settings_unit_ftx_seek_switch_on_brightness -> {
                 newSwitchOnBrightness = if (powerUnitF is PowerUnitFA) {
@@ -377,35 +377,51 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     override fun onRangeChangeListener(rangeBar: RangeBar?, leftPinIndex: Int, rightPinIndex: Int, leftPinValue: String?, rightPinValue: String?) {
-        if (rightPinIndex - leftPinIndex > 19) {
-            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
-                leftPinIndex
-            } else {
-                (leftPinIndex * 2.55 + .5).toInt()
-            }
-            minLowerDimmingLevel = leftPinIndex
-            textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
-            newUpperDimmingLevel = if (powerUnitF is PowerUnitFA) {
-                rightPinIndex
-            } else {
-                (rightPinIndex * 2.55 + .5).toInt()
-            }
-            minUpperDimmingLevel = rightPinIndex
-            textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+        newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+            leftPinIndex
         } else {
-            if (powerUnitF is PowerUnitFA) {
-                var pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
-                if (pivot < 11) {
-                    pivot = 11
-                }
-                if (pivot > 90) {
-                    pivot = 90
-                }
-                minLowerDimmingLevel = pivot - 10
-                minUpperDimmingLevel = pivot + 10
-            }
-            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+            (leftPinIndex * 2.55 + .5).toInt()
         }
+        newUpperDimmingLevel = if (powerUnitF is PowerUnitFA) {
+            rightPinIndex
+        } else {
+            (rightPinIndex * 2.55 + .5).toInt()
+        }
+
+        textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
+        textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+
+//        if (rightPinIndex - leftPinIndex > 19) {
+//            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                leftPinIndex
+//            } else {
+//                (leftPinIndex * 2.55 + .5).toInt()
+//            }
+//            minLowerDimmingLevel = leftPinIndex
+//            textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
+//
+//            newUpperDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                rightPinIndex
+//            } else {
+//                (rightPinIndex * 2.55 + .5).toInt()
+//            }
+//            minUpperDimmingLevel = rightPinIndex
+//            textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+//        } else {
+//            if (powerUnitF is PowerUnitFA) {
+//                var pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
+//                if (pivot < 11) {
+//                    pivot = 11
+//                }
+//                if (pivot > 90) {
+//                    pivot = 90
+//                }
+//                minLowerDimmingLevel = pivot - 10
+//                minUpperDimmingLevel = pivot + 10
+//            }
+//            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+//        }
+
         if (leftPinIndex == 0) {
             minLowerDimmingLevel = 1
             newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
@@ -413,34 +429,34 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             } else {
                 (minLowerDimmingLevel * 2.55 + .5).toInt()
             }
-            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, rightPinIndex)
         }
-        if (leftPinIndex > 50) {
-            minLowerDimmingLevel = 50
-            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
-                minLowerDimmingLevel
-            } else {
-                (minLowerDimmingLevel * 2.55 + .5).toInt()
-            }
-            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
-        }
+//        if (leftPinIndex > 50) {
+//            minLowerDimmingLevel = 50
+//            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                minLowerDimmingLevel
+//            } else {
+//                (minLowerDimmingLevel * 2.55 + .5).toInt()
+//            }
+//            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+//        }
 
-        if (leftPinIndex > seekSwitchOnLevel.progress) {
-            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
-                leftPinIndex
-            } else {
-                (leftPinIndex * 2.55 + .5).toInt()
-            }
-            seekSwitchOnLevel.progress = leftPinIndex
-        }
-        if (rightPinIndex < seekSwitchOnLevel.progress) {
-            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
-                rightPinIndex
-            } else {
-                (rightPinIndex * 2.55 + .5).toInt()
-            }
-            seekSwitchOnLevel.progress = rightPinIndex
-        }
+//        if (leftPinIndex > seekSwitchOnLevel.progress) {
+//            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+//                leftPinIndex
+//            } else {
+//                (leftPinIndex * 2.55 + .5).toInt()
+//            }
+//            seekSwitchOnLevel.progress = leftPinIndex
+//        }
+//        if (rightPinIndex < seekSwitchOnLevel.progress) {
+//            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+//                rightPinIndex
+//            } else {
+//                (rightPinIndex * 2.55 + .5).toInt()
+//            }
+//            seekSwitchOnLevel.progress = rightPinIndex
+//        }
     }
 
     // VIEW:INITIALISATION
@@ -1286,6 +1302,35 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
 
     private fun postSettings() {
         blockUI()
+
+        if (powerUnitF is PowerUnitFA) {
+            if (newUpperDimmingLevel - newLowerDimmingLevel == 0) {
+                newUpperDimmingLevel += 1
+                if (newUpperDimmingLevel > 100) {
+                    newLowerDimmingLevel = 99
+                    newUpperDimmingLevel = 100
+                }
+            }
+            if (newSwitchOnLevel < newLowerDimmingLevel || newUpperDimmingLevel < newSwitchOnLevel) {
+                newSwitchOnLevel = newLowerDimmingLevel
+            }
+        } else {
+            if (rangeDimming.rightIndex - rangeDimming.leftIndex < 20) {
+                if (rangeDimming.leftIndex + 20 > 100) {
+                    rangeDimming.setRangePinsByIndices(80, 100)
+                } else {
+                    rangeDimming.setRangePinsByIndices(rangeDimming.leftIndex, rangeDimming.leftIndex + 20)
+                }
+            }
+            if (50 < seekSwitchOnLevel.progress) {
+                seekSwitchOnLevel.progress = 50
+            }
+            if (newDimmingState == 1 && newRetransmissionState == 1) {
+                newDimmingState = 1
+                newRetransmissionState = 0
+            }
+        }
+
         Thread {
             try {
                 if (powerUnitF is PowerUnitFA) {
