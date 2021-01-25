@@ -237,7 +237,7 @@ public class SettingsControllerIPFragment extends DialogFragment implements View
                     if (pattern.matcher(sDNS).matches()) {
                         if (sDNS.contains(":")) {
                             int port = Integer.parseInt(sDNS.split(":")[1]);
-                            if (port > 65535) {
+                            if (1 > port || port > 65535) {
                                 showToast("Установите другой TCP/URL порт");
                                 return;
                             }
