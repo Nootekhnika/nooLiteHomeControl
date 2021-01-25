@@ -1206,11 +1206,10 @@ public class NooLiteF {
             } else {
                 out = Thermostat.OUTPUT_ON;
             }
-            int brightness = (int) ((double) Integer.parseInt(hex.substring(b + 1, b + 3), 16) * 100 / 255 + .5);
-            int temperature = Integer.parseInt(hex.substring(b + 1, b + 3), 16);
+            int data = Integer.parseInt(hex.substring(b + 1, b + 3), 16);
 
             //getOtherPowerUnitsFState(hex);
-            stateListener.onSwitchingF_TX_Ok(position, state, out, brightness, temperature);
+            stateListener.onSwitchingF_TX_Ok(position, state, out, data, data);
         } else {
             stateListener.onSwitchingF_TX_Failure(position, "getUnitsState #" + index + " connection error " + String.valueOf(response.code()));
         }

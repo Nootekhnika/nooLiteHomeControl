@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
+import com.noolitef.ftx.PowerUnitFA;
 import com.noolitef.ftx.RolletUnitF;
 import com.noolitef.presets.Preset;
 import com.noolitef.rx.GraphLogFragment;
@@ -520,7 +521,11 @@ public class RoomFragment extends Fragment {
             public void onSwitchingF_TX_Ok(final int position, final int state, final int out, final int brightness, final int temperature) {
                 if (units.get(position) instanceof PowerUnitF) {
                     ((PowerUnitF) units.get(position)).setState(state);
-                    ((PowerUnitF) units.get(position)).setBrightness(brightness);
+                    ((PowerUnitF) units.get(position)).setBrightness((int) (brightness * 100.0 / 255.0 + .5));
+                }
+                if (units.get(position) instanceof PowerUnitFA) {
+                    ((PowerUnitF) units.get(position)).setState(state);
+                    ((PowerUnitF) units.get(position)).setPresetBrightness(brightness);
                 }
                 if (units.get(position) instanceof PowerSocketF) {
                     ((PowerSocketF) units.get(position)).setState(state);
