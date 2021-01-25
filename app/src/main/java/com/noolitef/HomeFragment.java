@@ -724,7 +724,7 @@ public class HomeFragment extends Fragment {
                 }
                 if (units.get(position) instanceof PowerUnitFA) {
                     ((PowerUnitF) units.get(position)).setState(state);
-                    ((PowerUnitF) units.get(position)).setPresetBrightness(brightness);
+                    ((PowerUnitF) units.get(position)).setBrightness(brightness);
                 }
                 if (units.get(position) instanceof PowerSocketF) {
                     ((PowerSocketF) units.get(position)).setState(state);
@@ -744,7 +744,7 @@ public class HomeFragment extends Fragment {
                     public void run() {
                         unitsRecyclerAdapter.notifyItemChanged(position);
                         if (powerUnitDialog != null && powerUnitDialog.isAdded()) {
-                            powerUnitDialog.setBrightness(brightness);
+                            powerUnitDialog.setBrightness((int) (brightness * 100.0 / 255.0 + .5));
                             powerUnitDialog.setRawData(temperature);
                         }
                         if (thermostatDialog != null && thermostatDialog.isAdded())
