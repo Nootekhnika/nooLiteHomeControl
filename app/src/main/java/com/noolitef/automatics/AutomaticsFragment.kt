@@ -2,18 +2,18 @@ package com.noolitef.automatics
 
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.view.ContextThemeWrapper
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import com.noolitef.HomeActivity
 import com.noolitef.PRF64
 import com.noolitef.R
@@ -225,7 +225,7 @@ class AutomaticsFragment : Fragment(), IAutomatics, IAutomationFragment {
 
         val automationFragment = AutomationFragment.getInstance(childFragmentManager, nooLitePRF64, automation, httpClient, this)
         if (automationFragment.isAdded) return
-        automationFragment.show(fragmentManager, AutomationFragment::class.java.simpleName)
+        fragmentManager?.let { automationFragment.show(it, AutomationFragment::class.java.simpleName) }
     }
 
     override fun updateAutomation(position: Int, automation: Automation) {

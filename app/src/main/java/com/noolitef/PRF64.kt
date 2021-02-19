@@ -5,10 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.noolitef.automatics.Automation
-import com.noolitef.ftx.FTXUnits
-import com.noolitef.ftx.PowerSocketF
-import com.noolitef.ftx.PowerUnitF
-import com.noolitef.ftx.RolletUnitF
+import com.noolitef.ftx.*
 import com.noolitef.presets.Preset
 import com.noolitef.rx.*
 import com.noolitef.settings.Settings
@@ -841,6 +838,7 @@ class PRF64(private val activity: Activity) {
 
                 // sort FTXUnits by type
                 when (type) {
+                    // 0 -> MTRF
                     1 ->
                         // SLF
                         powerUnitsF.add(PowerUnitF(id, index, presetState, state, roomID, roomName, name, brightness, preset))
@@ -864,6 +862,12 @@ class PRF64(private val activity: Activity) {
                     7 ->
                         // SRF-R
                         rolletUnitsF.add(RolletUnitF(id, index, state, roomID, roomName, name))
+                    // 8 -> MTRF-A
+                    9 -> {
+                        // SUF-A
+                        powerUnitsF.add(PowerUnitFA(id, index, presetState, state, roomID, roomName, name, brightness, preset))
+                        powerUnitsF[powerUnitsF.size - 1].setDimming(dimmer)
+                    }
                 }
 
                 ftxCount++
@@ -1069,7 +1073,11 @@ class PRF64(private val activity: Activity) {
             }
 
             brightness = Integer.parseInt(state.substring(b + 1, b + 3), 16)
-            powerUnitF.brightness = (brightness / 255.0 * 100 + .5).toInt()
+            if (powerUnitF is PowerUnitFA) {
+                powerUnitF.brightness = brightness
+            } else {
+                powerUnitF.brightness = (brightness / 255.0 * 100 + .5).toInt()
+            }
 
             if (activity is HomeActivity) activity.updateAdapterItem(powerUnitF.adapterPosition)
         }

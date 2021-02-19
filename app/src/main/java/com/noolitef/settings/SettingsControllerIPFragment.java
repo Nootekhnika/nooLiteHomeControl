@@ -6,9 +6,9 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.SwitchCompat;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.widget.SwitchCompat;
 import android.text.Html;
 import android.text.format.Formatter;
 import android.text.method.LinkMovementMethod;
@@ -237,7 +237,7 @@ public class SettingsControllerIPFragment extends DialogFragment implements View
                     if (pattern.matcher(sDNS).matches()) {
                         if (sDNS.contains(":")) {
                             int port = Integer.parseInt(sDNS.split(":")[1]);
-                            if (port > 65535) {
+                            if (1 > port || port > 65535) {
                                 showToast("Установите другой TCP/URL порт");
                                 return;
                             }
