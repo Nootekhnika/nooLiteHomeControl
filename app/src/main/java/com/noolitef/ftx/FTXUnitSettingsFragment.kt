@@ -4,22 +4,24 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.AppCompatCheckBox
-import android.support.v7.widget.SwitchCompat
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.appcompat.widget.SwitchCompat
+import androidx.fragment.app.DialogFragment
 import com.appyvet.materialrangebar.RangeBar
 import com.noolitef.GUIBlockFragment
 import com.noolitef.HomeActivity
 import com.noolitef.NooLiteF
 import com.noolitef.R
 import com.noolitef.settings.Settings
-import okhttp3.*
-import java.lang.StringBuilder
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import java.net.ConnectException
 import java.net.SocketException
 import java.util.*
@@ -29,20 +31,29 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         private const val SEND_STATE = "82"
     }
 
+    // DEPENDENCIES
+
     // main
     private lateinit var homeActivity: HomeActivity
     private lateinit var powerUnitF: PowerUnitF
+
     // http client
     private lateinit var client: OkHttpClient
     private lateinit var request: Request
     private lateinit var call: Call
     private lateinit var response: Response
     private lateinit var sResponse: String
+
+    // DATA
+
     // main settings byte
     private var mainSettingsByteString = StringBuilder("00000000")
+    private var additionSettingsByteString = StringBuilder("00000000")
+
     // switch on level
     private var currentSwitchOnLevel = -1
     private var newSwitchOnLevel = -1
+
     // dimming
     private var currentDimmingState = -1
     private var newDimmingState = -1
@@ -52,40 +63,54 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private var currentUpperDimmingLevel = 100
     private var newUpperDimmingLevel = 100
     private var minUpperDimmingLevel = 100
+
     // memory state
     private var currentPowerUpState = -1
     private var newPowerUpState = -1
     private var currentRememberState = -1
     private var newRememberState = -1
+
     // switch on brightness
     private var currentSwitchOnBrightness = -1
     private var newSwitchOnBrightness = -1
+
     // external input state
     private var currentExternalInputState = -1
     private var newExternalInputState = -1
+
     // retransmission
     private var currentRetransmissionState = -1
     private var newRetransmissionState = -1
     private var currentRetransmissionDelay = 0
     private var newRetransmissionDelay = 0
+
     // locks state
     private var currentNooLiteState = -1
     private var newNooLiteState = -1
     private var currentTemporaryOnState = -1
     private var newTemporaryOnState = -1
+
+    // transmitter sensitivity
+    private var currentTransmitterSensitivity = -1
+    private var newTransmitterSensitivity = -1
+
     // info
     private var deviceType = -1
     private var firmwareVersion = -1
     private var freeNooLiteMemoryCells = -1
     private var freeNooLiteFMemoryCells = -1
 
+    // VIEW
+
     // title
     private lateinit var buttonBack: Button
     private lateinit var buttonSave: Button
+
     // switch on level
     private lateinit var progressSwitchOnLevel: ProgressBar
     private lateinit var imageSwitchOnLevelWarning: ImageView
     private lateinit var seekSwitchOnLevel: SeekBar
+
     // dimming
     private lateinit var textDimmingState: TextView
     private lateinit var progressDimmingState: ProgressBar
@@ -96,17 +121,20 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var layoutDimmingRangeAlternative: LinearLayout
     private lateinit var textDimmingLowerLevel: TextView
     private lateinit var textDimmingUpperLevel: TextView
+
     // memory state
     private lateinit var progressMemoryState: ProgressBar
     private lateinit var layoutMemoryState: LinearLayout
     private lateinit var checkPowerUpState: AppCompatCheckBox
     private lateinit var checkRememberState: AppCompatCheckBox
     private lateinit var imageMemoryStateWarning: ImageView
+
     // switch on brightness
     private lateinit var progressSwitchOnBrightness: ProgressBar
     private lateinit var imageSwitchOnBrightnessWarning: ImageView
     private lateinit var layoutSwitchOnBrightness: LinearLayout
     private lateinit var seekSwitchOnBrightness: SeekBar
+
     // external input state
     private lateinit var progressExternalInputState: ProgressBar
     private lateinit var imageExternalInputStateWarning: ImageView
@@ -115,6 +143,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var radioExternalInputStateSwitchOff: RadioButton
     private lateinit var radioExternalInputStateSwitchOn: RadioButton
     private lateinit var radioExternalInputStateSwitch: RadioButton
+
     // retransmission
     private lateinit var textRetransmissionState: TextView
     private lateinit var progressRetransmissionState: ProgressBar
@@ -122,17 +151,31 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     private lateinit var switchRetransmissionState: SwitchCompat
     private lateinit var layoutRetransmissionDelay: LinearLayout
     private lateinit var seekRetransmissionDelay: SeekBar
+
     // locks state
     private lateinit var progressLocksConfig: ProgressBar
     private lateinit var layoutLocksConfig: LinearLayout
     private lateinit var checkNooLiteState: AppCompatCheckBox
     private lateinit var checkTemporaryOnState: AppCompatCheckBox
     private lateinit var imageLocksConfigWarning: ImageView
+
+    // transmitter sensitivity
+    private lateinit var layoutTransmitterSettings: LinearLayout
+    private lateinit var layoutTransmitterSensitivity: LinearLayout
+    private lateinit var progressTransmitterSensitivity: ProgressBar
+    private lateinit var groupTransmitterSensitivity: RadioGroup
+    private lateinit var radioTransmitterSensitivity0: RadioButton
+    private lateinit var radioTransmitterSensitivity6: RadioButton
+    private lateinit var radioTransmitterSensitivity12: RadioButton
+    private lateinit var radioTransmitterSensitivity18: RadioButton
+    private lateinit var imageTransmitterSensitivity: ImageView
+
     // info
     private lateinit var textDeviceType: TextView
     private lateinit var textFirmwareVersion: TextView
     private lateinit var textFreeNooLiteMemoryCells: TextView
     private lateinit var textFreeNooLiteFMemoryCells: TextView
+
     // loading fragment
     private var guiBlockFragment: GUIBlockFragment? = null
 
@@ -159,8 +202,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.setCanceledOnTouchOutside(true)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        dialog?.setCanceledOnTouchOutside(true)
 
         return initView(inflater.inflate(R.layout.fragment_settings_unit_ftx, null))
     }
@@ -215,6 +258,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             R.id.fragment_settings_unit_ftx_checkbox_power_up_state -> {
                 newPowerUpState =
                         if (checked) {
+                            checkRememberState.isChecked = false
                             1
                         } else {
                             0
@@ -223,6 +267,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             R.id.fragment_settings_unit_ftx_checkbox_remember_state -> {
                 newRememberState =
                         if (checked) {
+                            checkPowerUpState.isChecked = false
                             1
                         } else {
                             0
@@ -265,6 +310,18 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                             0
                         }
             }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_0 -> {
+                if (checked) newTransmitterSensitivity = 0
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_6 -> {
+                if (checked) newTransmitterSensitivity = 1
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_12 -> {
+                if (checked) newTransmitterSensitivity = 2
+            }
+            R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_18 -> {
+                if (checked) newTransmitterSensitivity = 3
+            }
         }
     }
 
@@ -275,10 +332,43 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         when (seekBar?.id) {
             R.id.fragment_settings_unit_ftx_seek_switch_on_level -> {
-                newSwitchOnLevel = (progress * 2.55 + .5).toInt()
+                newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+                    progress
+                } else {
+                    (progress * 2.55 + .5).toInt()
+                }
+                if (newSwitchOnLevel == 0) {
+                    newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+                        1
+                    } else {
+                        3
+                    }
+                    seekSwitchOnLevel.progress = 1
+                }
+
+//                if (newSwitchOnLevel < newLowerDimmingLevel) {
+//                    newLowerDimmingLevel = newSwitchOnLevel
+//                    if (powerUnitF is PowerUnitFA) {
+//                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+//                    } else {
+//                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+//                    }
+//                }
+//                if (newSwitchOnLevel > newUpperDimmingLevel) {
+//                    newUpperDimmingLevel = newSwitchOnLevel
+//                    if (powerUnitF is PowerUnitFA) {
+//                        rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+//                    } else {
+//                        rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+//                    }
+//                }
             }
             R.id.fragment_settings_unit_ftx_seek_switch_on_brightness -> {
-                newSwitchOnBrightness = (progress * 2.55 + .5).toInt()
+                newSwitchOnBrightness = if (powerUnitF is PowerUnitFA) {
+                    progress
+                } else {
+                    (progress * 2.55 + .5).toInt()
+                }
             }
             R.id.fragment_settings_unit_ftx_seek_retransmission_delay -> {
                 newRetransmissionDelay = progress
@@ -287,16 +377,86 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     override fun onRangeChangeListener(rangeBar: RangeBar?, leftPinIndex: Int, rightPinIndex: Int, leftPinValue: String?, rightPinValue: String?) {
-        if (rightPinIndex - leftPinIndex > 19) {
-            newLowerDimmingLevel = (leftPinIndex * 2.55 + .5).toInt()
-            minLowerDimmingLevel = leftPinIndex
-            textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
-            newUpperDimmingLevel = (rightPinIndex * 2.55 + .5).toInt()
-            minUpperDimmingLevel = rightPinIndex
-            textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+        newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+            leftPinIndex
         } else {
-            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+            (leftPinIndex * 2.55 + .5).toInt()
         }
+        newUpperDimmingLevel = if (powerUnitF is PowerUnitFA) {
+            rightPinIndex
+        } else {
+            (rightPinIndex * 2.55 + .5).toInt()
+        }
+
+        textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
+        textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+
+//        if (rightPinIndex - leftPinIndex > 19) {
+//            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                leftPinIndex
+//            } else {
+//                (leftPinIndex * 2.55 + .5).toInt()
+//            }
+//            minLowerDimmingLevel = leftPinIndex
+//            textDimmingLowerLevel.text = leftPinIndex.toString().plus("%")
+//
+//            newUpperDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                rightPinIndex
+//            } else {
+//                (rightPinIndex * 2.55 + .5).toInt()
+//            }
+//            minUpperDimmingLevel = rightPinIndex
+//            textDimmingUpperLevel.text = rightPinIndex.toString().plus("%")
+//        } else {
+//            if (powerUnitF is PowerUnitFA) {
+//                var pivot = leftPinIndex + (rightPinIndex - leftPinIndex) / 2
+//                if (pivot < 11) {
+//                    pivot = 11
+//                }
+//                if (pivot > 90) {
+//                    pivot = 90
+//                }
+//                minLowerDimmingLevel = pivot - 10
+//                minUpperDimmingLevel = pivot + 10
+//            }
+//            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+//        }
+
+        if (leftPinIndex == 0) {
+            minLowerDimmingLevel = 1
+            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+                minLowerDimmingLevel
+            } else {
+                (minLowerDimmingLevel * 2.55 + .5).toInt()
+            }
+            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, rightPinIndex)
+        }
+//        if (leftPinIndex > 50) {
+//            minLowerDimmingLevel = 50
+//            newLowerDimmingLevel = if (powerUnitF is PowerUnitFA) {
+//                minLowerDimmingLevel
+//            } else {
+//                (minLowerDimmingLevel * 2.55 + .5).toInt()
+//            }
+//            rangeDimming.setRangePinsByIndices(minLowerDimmingLevel, minUpperDimmingLevel)
+//        }
+
+//        if (leftPinIndex > seekSwitchOnLevel.progress) {
+//            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+//                leftPinIndex
+//            } else {
+//                (leftPinIndex * 2.55 + .5).toInt()
+//            }
+//            seekSwitchOnLevel.progress = leftPinIndex
+//        }
+//        if (rightPinIndex < seekSwitchOnLevel.progress) {
+//            newSwitchOnLevel = if (powerUnitF is PowerUnitFA) {
+//                rightPinIndex
+//            } else {
+//                (rightPinIndex * 2.55 + .5).toInt()
+//            }
+//            seekSwitchOnLevel.progress = rightPinIndex
+//        }
     }
 
     // VIEW:INITIALISATION
@@ -346,6 +506,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         layoutSwitchOnBrightness = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_switch_on_brightness)
         seekSwitchOnBrightness = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_seek_switch_on_brightness)
         seekSwitchOnBrightness.setOnSeekBarChangeListener(this)
+        if (powerUnitF is PowerUnitFA) {
+            seekSwitchOnBrightness.isEnabled = false
+        }
         // external input state
         progressExternalInputState = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_progress_external_input_state)
         imageExternalInputStateWarning = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_external_input_state)
@@ -375,6 +538,23 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         checkTemporaryOnState = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_checkbox_temporary_on_state)
         checkTemporaryOnState.setOnCheckedChangeListener(this)
         imageLocksConfigWarning = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_locks_config_warning)
+        // transmitter sensitivity
+        layoutTransmitterSettings = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_transmitter_settings)
+        if (powerUnitF is PowerUnitFA) {
+            layoutTransmitterSettings.visibility = View.VISIBLE
+        }
+        layoutTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_layout_transmitter_sensitivity)
+        progressTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_progress_transmitter_sensitivity)
+        groupTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_group_transmitter_sensitivity)
+        radioTransmitterSensitivity0 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_0)
+        radioTransmitterSensitivity0.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity6 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_6)
+        radioTransmitterSensitivity6.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity12 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_12)
+        radioTransmitterSensitivity12.setOnCheckedChangeListener(this)
+        radioTransmitterSensitivity18 = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_radio_transmitter_sensitivity_18)
+        radioTransmitterSensitivity18.setOnCheckedChangeListener(this)
+        imageTransmitterSensitivity = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_image_transmitter_sensitivity_warning)
         // info
         textDeviceType = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_text_info_device_type)
         textFirmwareVersion = fragmentView.findViewById(R.id.fragment_settings_unit_ftx_text_info_firmware_version)
@@ -385,7 +565,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     }
 
     private fun setupFragment() {
-        val fragmentWindow = dialog.window
+        val fragmentWindow = dialog?.window
         val dialogParams = fragmentWindow?.attributes
         dialogParams?.dimAmount = 0.75f
         fragmentWindow?.attributes = dialogParams
@@ -417,7 +597,11 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 else -> {
                     progressSwitchOnLevel.visibility = View.GONE
                     imageSwitchOnLevelWarning.visibility = View.GONE
-                    seekSwitchOnLevel.progress = (newSwitchOnLevel / 255.0 * 100 + .5).toInt()
+                    if (powerUnitF is PowerUnitFA) {
+                        seekSwitchOnLevel.progress = newSwitchOnLevel
+                    } else {
+                        seekSwitchOnLevel.progress = (newSwitchOnLevel / 255.0 * 100 + .5).toInt()
+                    }
                     seekSwitchOnLevel.visibility = View.VISIBLE
                 }
             }
@@ -453,7 +637,11 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     layoutDimmingRange.visibility = View.VISIBLE
                 }
             }
-            rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+            if (powerUnitF is PowerUnitFA) {
+                rangeDimming.setRangePinsByIndices(newLowerDimmingLevel, newUpperDimmingLevel)
+            } else {
+                rangeDimming.setRangePinsByIndices((newLowerDimmingLevel / 255.0 * 100 + .5).toInt(), (newUpperDimmingLevel / 255.0 * 100 + .5).toInt())
+            }
         }
     }
 
@@ -507,7 +695,11 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 else -> {
                     progressSwitchOnBrightness.visibility = View.GONE
                     imageSwitchOnBrightnessWarning.visibility = View.GONE
-                    seekSwitchOnBrightness.progress = (newSwitchOnBrightness / 255.0 * 100 + .5).toInt()
+                    if (powerUnitF is PowerUnitFA) {
+                        seekSwitchOnBrightness.progress = newSwitchOnBrightness
+                    } else {
+                        seekSwitchOnBrightness.progress = (newSwitchOnBrightness / 255.0 * 100 + .5).toInt()
+                    }
                     layoutSwitchOnBrightness.visibility = View.VISIBLE
                 }
             }
@@ -613,6 +805,35 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         }
     }
 
+    private fun showTransmitterSensitivity() {
+        if (!isAdded) return
+        homeActivity.runOnUiThread {
+            when (newTransmitterSensitivity) {
+                0 -> {
+                    radioTransmitterSensitivity0.isChecked = true
+                }
+                1 -> {
+                    radioTransmitterSensitivity6.isChecked = true
+                }
+                2 -> {
+                    radioTransmitterSensitivity12.isChecked = true
+                }
+                3 -> {
+                    radioTransmitterSensitivity18.isChecked = true
+                }
+            }
+            if (newTransmitterSensitivity == -1) {
+                progressTransmitterSensitivity.visibility = View.GONE
+                layoutTransmitterSensitivity.visibility = View.GONE
+                imageTransmitterSensitivity.visibility = View.VISIBLE
+            } else {
+                progressTransmitterSensitivity.visibility = View.GONE
+                imageTransmitterSensitivity.visibility = View.GONE
+                layoutTransmitterSensitivity.visibility = View.VISIBLE
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun showDeviceInfo() {
         if (!isAdded) return
@@ -623,6 +844,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 }
                 5 -> {
                     textDeviceType.text = "SUF-1-300"
+                }
+                9 -> {
+                    textDeviceType.text = "SUF-1-300-A"
                 }
                 else -> {
                     textDeviceType.text = "устройство не определено"
@@ -672,24 +896,34 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
     // GET
 
     private fun getSettings() {
-        Thread(Runnable {
+        Thread {
             try {
-                val successfully: Boolean = getMainSettingsByte()
-                Thread.sleep(100)
-                getSwitchOnLevel()
-                Thread.sleep(100)
-                getDimmingState(successfully)
-                getDimmingRange(successfully)
-                getMemoryState(successfully)
-                Thread.sleep(100)
-                getSwitchOnBrightness()
-                getExternalInputState(successfully)
-                Thread.sleep(100)
-                getRetransmissionState(successfully)
-                getRetransmissionDelay(successfully)
-                getLocksConfig(successfully)
-                Thread.sleep(100)
-                getDeviceInfo()
+                if (powerUnitF is PowerUnitFA) {
+                    getInfo()
+                    Thread.sleep(100)
+                    getMainSettings()
+                    Thread.sleep(100)
+                    getDimmingSettings()
+                    Thread.sleep(100)
+                    getRetransmissionSettings()
+                } else {
+                    val successfully: Boolean = getMainSettingsByte()
+                    Thread.sleep(100)
+                    getSwitchOnLevel()
+                    Thread.sleep(100)
+                    getDimmingState(successfully)
+                    getDimmingRange(successfully)
+                    getMemoryState(successfully)
+                    Thread.sleep(100)
+                    getSwitchOnBrightness()
+                    getExternalInputState(successfully)
+                    Thread.sleep(100)
+                    getRetransmissionState(successfully)
+                    getRetransmissionDelay(successfully)
+                    getLocksConfig(successfully)
+                    Thread.sleep(100)
+                    getDeviceInfo()
+                }
             } catch (se: SocketException) {
                 call.cancel()
                 homeActivity.writeAppLog("FTXUnitSettings.kt : getSettings()" + "\n" + se.toString() + "\n" + NooLiteF.getStackTrace(se))
@@ -706,10 +940,15 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 showExternalInputState()
                 showRetransmissionSettings()
                 showLocksConfig()
+                if (powerUnitF is PowerUnitFA) {
+                    showTransmitterSensitivity()
+                }
                 showDeviceInfo()
             }
-        }).start()
+        }.start()
     }
+
+    // SUF-1-300 SETTINGS
 
     // get switch on level
 
@@ -729,7 +968,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -772,7 +1011,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -828,7 +1067,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -840,10 +1079,8 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
                         newLowerDimmingLevel = sResponse.substring(16, 18).toInt(16)
                         currentLowerDimmingLevel = newLowerDimmingLevel
-                        minLowerDimmingLevel = newLowerDimmingLevel
                         newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
                         currentUpperDimmingLevel = newUpperDimmingLevel
-                        minUpperDimmingLevel = newUpperDimmingLevel
                         showDimmingSettings()
                         return true
                     }
@@ -894,7 +1131,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -970,7 +1207,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1032,7 +1269,7 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
             response = call.execute()
             if (response.isSuccessful) {
                 call.cancel()
-                Thread.sleep(100)
+                Thread.sleep(200)
                 request = Request.Builder()
                         .url(Settings.URL() + "rxset.htm")
                         .build()
@@ -1065,29 +1302,80 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
 
     private fun postSettings() {
         blockUI()
-        Thread(Runnable {
+
+        if (powerUnitF is PowerUnitFA) {
+            if (newUpperDimmingLevel - newLowerDimmingLevel == 0) {
+                newUpperDimmingLevel += 1
+                if (newUpperDimmingLevel > 100) {
+                    newLowerDimmingLevel = 99
+                    newUpperDimmingLevel = 100
+                }
+            }
+            if (newSwitchOnLevel < newLowerDimmingLevel || newUpperDimmingLevel < newSwitchOnLevel) {
+                newSwitchOnLevel = newLowerDimmingLevel
+            }
+        } else {
+            if (rangeDimming.rightIndex - rangeDimming.leftIndex < 20) {
+                if (rangeDimming.leftIndex + 20 > 100) {
+                    rangeDimming.setRangePinsByIndices(80, 100)
+                } else {
+                    rangeDimming.setRangePinsByIndices(rangeDimming.leftIndex, rangeDimming.leftIndex + 20)
+                }
+            }
+            if (50 < seekSwitchOnLevel.progress) {
+                seekSwitchOnLevel.progress = 50
+            }
+            if (newDimmingState == 1 && newRetransmissionState == 1) {
+                newDimmingState = 1
+                newRetransmissionState = 0
+            }
+        }
+
+        Thread {
             try {
-                if (setMainSettingsByte()) {
-                    if (!postMainSettingsByte()) throw ConnectException("ConnectException in postMainSettingsByte()")
-                    Thread.sleep(200)
+                if (powerUnitF is PowerUnitFA) {
+                    val setD0 = setMainSettingsByte()
+                    val setD1 = setAdditionalSettingsByte()
+                    if (setD0 || setD1) {
+                        if (!postMainSettings()) throw ConnectException("ConnectException in postMainSettings()")
+                        Thread.sleep(200)
+                    }
+                    if ((currentLowerDimmingLevel != newLowerDimmingLevel) || (currentSwitchOnLevel != newSwitchOnLevel) || (currentUpperDimmingLevel != newUpperDimmingLevel)) {
+                        if (!postDimmingSettings()) throw ConnectException("ConnectException in postDimmingSettings()")
+                        Thread.sleep(200)
+                    }
+                    if (currentRetransmissionDelay != newRetransmissionDelay) {
+                        if (!postRetransmissionSettings()) throw ConnectException("ConnectException in postRetransmissionSettings()")
+                        Thread.sleep(200)
+                    }
+                } else {
+                    if (setMainSettingsByte()) {
+                        if (!postMainSettingsByte()) throw ConnectException("ConnectException in postMainSettingsByte()")
+                        Thread.sleep(200)
+                    }
+                    if ((currentLowerDimmingLevel != newLowerDimmingLevel) || (currentUpperDimmingLevel != newUpperDimmingLevel)) {
+                        if (!postDimmingRange()) throw ConnectException("ConnectException in postDimmingRange()")
+                        Thread.sleep(200)
+                    }
+                    if (currentSwitchOnLevel != newSwitchOnLevel) {
+                        if (!postSwitchOnLevel()) throw ConnectException("ConnectException in postSwitchOnLevel()")
+                        Thread.sleep(200)
+                    }
+                    if (currentSwitchOnBrightness != newSwitchOnBrightness) {
+                        if (!postSwitchOnBrightness()) throw ConnectException("ConnectException in postSwitchOnBrightness()")
+                        Thread.sleep(200)
+                    }
+                    if (currentRetransmissionDelay != newRetransmissionDelay) {
+                        if (!postRetransmissionDelay()) throw ConnectException("ConnectException in postRetransmissionDelay()")
+                    }
+
+                    getDimmingState(true)
+                    getMemoryState(true)
+                    getExternalInputState(true)
+                    getRetransmissionState(true)
+                    getLocksConfig(true)
                 }
-                if ((currentLowerDimmingLevel != newLowerDimmingLevel) || (currentUpperDimmingLevel != newUpperDimmingLevel)) {
-                    if (!postDimmingRange()) throw ConnectException("ConnectException in postDimmingRange()")
-                    Thread.sleep(200)
-                }
-                if (currentSwitchOnLevel != newSwitchOnLevel) {
-                    if (!postSwitchOnLevel()) throw ConnectException("ConnectException in postSwitchOnLevel()")
-                    Thread.sleep(200)
-                }
-                if (currentSwitchOnBrightness != newSwitchOnBrightness) {
-                    if (!postSwitchOnBrightness()) throw ConnectException("ConnectException in postSwitchOnBrightness()")
-                    Thread.sleep(200)
-                }
-                if (currentRetransmissionDelay != newRetransmissionDelay) {
-                    if (!postRetransmissionDelay()) throw ConnectException("ConnectException in postRetransmissionDelay()")
-                }
-                showToast("Настройки сохранены")
-                dismiss()
+                showToast("Настройки отправлены на устройство")
             } catch (ce: ConnectException) {
                 call.cancel()
                 homeActivity.writeAppLog("FTXUnitSettings.kt : setSettings()" + "\n" + ce.toString() + "\n" + NooLiteF.getStackTrace(ce))
@@ -1096,8 +1384,22 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                 call.cancel()
                 homeActivity.writeAppLog("FTXUnitSettings.kt : setSettings()" + "\n" + e.toString() + "\n" + NooLiteF.getStackTrace(e))
                 showToast(homeActivity.getString(R.string.some_thing_went_wrong))
+            } finally {
+                showSwitchOnLevelSettings()
+                showDimmingSettings()
+                showMemoryStateSettings()
+                showSwitchOnBrightnessSettings()
+                showExternalInputState()
+                showRetransmissionSettings()
+                showLocksConfig()
+                if (powerUnitF is PowerUnitFA) {
+                    showTransmitterSensitivity()
+                }
+                showDeviceInfo()
+
+                unblockUI()
             }
-        }).start()
+        }.start()
     }
 
     // set main settings byte
@@ -1135,6 +1437,15 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
         return post
     }
 
+    private fun setAdditionalSettingsByte(): Boolean {
+        var post = false
+        if (currentTransmitterSensitivity != newTransmitterSensitivity) {
+            additionSettingsByteString.replace(6, 8, String.format("%2s", Integer.toBinaryString(newTransmitterSensitivity)).replace(' ', '0'))
+            post = true
+        }
+        return post
+    }
+
     // post main settings byte
 
     private fun postMainSettingsByte(): Boolean {
@@ -1163,9 +1474,9 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0') == mainSettingsByteString.toString()) {
+                        mainSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0'))
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1202,9 +1513,12 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newUpperDimmingLevel && sResponse.substring(16, 18).toInt(16) == newLowerDimmingLevel) {
+                        newLowerDimmingLevel = sResponse.substring(16, 18).toInt(16)
+                        currentLowerDimmingLevel = newLowerDimmingLevel
+                        newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
+                        currentUpperDimmingLevel = newUpperDimmingLevel
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1241,9 +1555,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newSwitchOnLevel) {
+                        newSwitchOnLevel = sResponse.substring(14, 16).toInt(16)
+                        currentSwitchOnLevel = newSwitchOnLevel
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1280,9 +1595,10 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newRetransmissionDelay) {
+                        newRetransmissionDelay = sResponse.substring(14, 16).toInt(16)
+                        currentRetransmissionDelay = newRetransmissionDelay
+
                         return true
-                        //}
                     }
                 }
             }
@@ -1319,9 +1635,338 @@ class FTXUnitSettingsFragment : DialogFragment(), View.OnClickListener, Compound
                     sResponse = response.body()!!.string()
                     call.cancel()
                     if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
-                        //if (sResponse.substring(14, 16).toInt(16) == newSwitchOnBrightness) {
+                        newSwitchOnBrightness = sResponse.substring(16, 18).toInt(16)
+                        currentSwitchOnBrightness = newSwitchOnBrightness
+
                         return true
-                        //}
+                    }
+                }
+            }
+        }
+        call.cancel()
+        return false
+    }
+
+    // SUF-1-300-A SETTINGS
+
+    // GET
+
+    private fun getInfo() {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=0002080000800000000000%s", powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        deviceType = sResponse.substring(14, 16).toInt(16)
+                        firmwareVersion = sResponse.substring(16, 18).toInt(16)
+                        newSwitchOnBrightness = sResponse.substring(20, 22).toInt(16)
+                        currentSwitchOnBrightness = newSwitchOnBrightness
+                        freeNooLiteMemoryCells = -1
+                        freeNooLiteFMemoryCells = -1
+
+                        return
+                    }
+                }
+            }
+        }
+        call.cancel()
+        deviceType = -1
+        firmwareVersion = -1
+        currentSwitchOnBrightness = -1
+        newSwitchOnBrightness = -1
+        freeNooLiteMemoryCells = -1
+        freeNooLiteFMemoryCells = -1
+    }
+
+    private fun getMainSettings() {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=0002080000801000000000%s", powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        mainSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0'))
+
+                        newRememberState = mainSettingsByteString.substring(7).toInt()
+                        currentRememberState = newRememberState
+                        newDimmingState = mainSettingsByteString.substring(6, 7).toInt()
+                        currentDimmingState = newDimmingState
+                        newNooLiteState = mainSettingsByteString.substring(5, 6).toInt()
+                        currentNooLiteState = newNooLiteState
+                        newExternalInputState = mainSettingsByteString.substring(3, 5).toInt(2)
+                        currentExternalInputState = newExternalInputState
+                        newPowerUpState = mainSettingsByteString.substring(2, 3).toInt()
+                        currentPowerUpState = newPowerUpState
+                        newRetransmissionState = mainSettingsByteString.substring(1, 2).toInt()
+                        currentRetransmissionState = newRetransmissionState
+                        newTemporaryOnState = mainSettingsByteString.substring(0, 1).toInt()
+                        currentTemporaryOnState = newTemporaryOnState
+
+                        additionSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(16, 18).toInt(16))).replace(' ', '0'))
+                        newTransmitterSensitivity = additionSettingsByteString.substring(6).toInt(2)
+                        currentTransmitterSensitivity = newTransmitterSensitivity
+
+                        return
+                    }
+                }
+            }
+        }
+        call.cancel()
+    }
+
+    private fun getDimmingSettings() {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=0002080000801100000000%s", powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newSwitchOnLevel = sResponse.substring(16, 18).toInt(16)
+                        currentSwitchOnLevel = newSwitchOnLevel
+                        newLowerDimmingLevel = sResponse.substring(18, 20).toInt(16)
+                        currentLowerDimmingLevel = newLowerDimmingLevel
+                        newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
+                        currentUpperDimmingLevel = newUpperDimmingLevel
+
+                        return
+                    }
+                }
+            }
+        }
+        call.cancel()
+        currentSwitchOnLevel = -1
+        newSwitchOnLevel = -1
+        newDimmingState = -1
+        currentDimmingState = newDimmingState
+    }
+
+    private fun getRetransmissionSettings() {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=0002080000801200000000%s", powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newRetransmissionDelay = sResponse.substring(14, 16).toInt(16)
+                        currentRetransmissionDelay = newRetransmissionDelay
+
+                        return
+                    }
+                }
+            }
+        }
+        call.cancel()
+        newRetransmissionDelay = -1
+        currentRetransmissionDelay = -1
+    }
+
+    // POST
+
+    private fun postMainSettings(): Boolean {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=00020800008110%s%sFFFF%s", NooLiteF.getHexString(mainSettingsByteString.toString().toInt(2)), NooLiteF.getHexString(additionSettingsByteString.toString().toInt(2)), powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        mainSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(14, 16).toInt(16))).replace(' ', '0'))
+
+                        newRememberState = mainSettingsByteString.substring(7).toInt()
+                        currentRememberState = newRememberState
+                        newDimmingState = mainSettingsByteString.substring(6, 7).toInt()
+                        currentDimmingState = newDimmingState
+                        newNooLiteState = mainSettingsByteString.substring(5, 6).toInt()
+                        currentNooLiteState = newNooLiteState
+                        newExternalInputState = mainSettingsByteString.substring(3, 5).toInt(2)
+                        currentExternalInputState = newExternalInputState
+                        newPowerUpState = mainSettingsByteString.substring(2, 3).toInt()
+                        currentPowerUpState = newPowerUpState
+                        newRetransmissionState = mainSettingsByteString.substring(1, 2).toInt()
+                        currentRetransmissionState = newRetransmissionState
+                        newTemporaryOnState = mainSettingsByteString.substring(0, 1).toInt()
+                        currentTemporaryOnState = newTemporaryOnState
+
+                        additionSettingsByteString = StringBuilder(String.format("%8s", Integer.toBinaryString(sResponse.substring(16, 18).toInt(16))).replace(' ', '0'))
+                        newTransmitterSensitivity = additionSettingsByteString.substring(6).toInt(2)
+                        currentTransmitterSensitivity = newTransmitterSensitivity
+
+                        return true
+                    }
+                }
+            }
+        }
+        call.cancel()
+        return false
+    }
+
+    private fun postDimmingSettings(): Boolean {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=00020800008111%s%s%s00%s", NooLiteF.getHexString(newUpperDimmingLevel), NooLiteF.getHexString(newSwitchOnLevel), NooLiteF.getHexString(newLowerDimmingLevel), powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newSwitchOnLevel = sResponse.substring(16, 18).toInt(16)
+                        currentSwitchOnLevel = newSwitchOnLevel
+                        newLowerDimmingLevel = sResponse.substring(18, 20).toInt(16)
+                        currentLowerDimmingLevel = newLowerDimmingLevel
+                        newUpperDimmingLevel = sResponse.substring(14, 16).toInt(16)
+                        currentUpperDimmingLevel = newUpperDimmingLevel
+
+                        return true
+                    }
+                }
+            }
+        }
+        call.cancel()
+        return false
+    }
+
+    private fun postRetransmissionSettings(): Boolean {
+        request = Request.Builder()
+                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", powerUnitF.id))
+                .build()
+        call = client.newCall(request)
+        response = call.execute()
+        if (response.isSuccessful) {
+            call.cancel()
+            Thread.sleep(100)
+            request = Request.Builder()
+                    .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=00020800008112%s000000%s", NooLiteF.getHexString(newRetransmissionDelay), powerUnitF.id))
+                    .build()
+            call = client.newCall(request)
+            response = call.execute()
+            if (response.isSuccessful) {
+                call.cancel()
+                Thread.sleep(200)
+                request = Request.Builder()
+                        .url(Settings.URL() + "rxset.htm")
+                        .build()
+                call = client.newCall(request)
+                response = call.execute()
+                if (response.isSuccessful) {
+                    sResponse = response.body()!!.string()
+                    call.cancel()
+                    if (sResponse.substring(10, 12) == SEND_STATE && sResponse.substring(22, 30) == powerUnitF.id) {
+                        newRetransmissionDelay = sResponse.substring(14, 16).toInt(16)
+                        currentRetransmissionDelay = newRetransmissionDelay
+
+                        return true
                     }
                 }
             }

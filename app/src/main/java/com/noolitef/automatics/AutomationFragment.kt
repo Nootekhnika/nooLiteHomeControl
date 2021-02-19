@@ -2,14 +2,14 @@ package com.noolitef.automatics
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentManager
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.noolitef.*
 import com.noolitef.customview.UniversalSeekBar
 import com.noolitef.ftx.PowerSocketF
@@ -652,7 +652,7 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
 
     private fun setupWindow() {
 
-        val window = dialog.window
+        val window = dialog?.window
 
         val dialogParams = window?.attributes
         dialogParams?.dimAmount = 0.75f
@@ -716,7 +716,7 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
                         iAutomationUnit = this
                 )
                 if (automationUnitsFragment.isAdded) return
-                automationUnitsFragment.show(fragmentManager, AutomationUnitsFragment::class.java.simpleName)
+                fragmentManager?.let { automationUnitsFragment.show(it, AutomationUnitsFragment::class.java.simpleName) }
             }
             R.id.fragment_automation_button_unit -> {
                 val automationUnitsFragment: AutomationUnitsFragment = AutomationUnitsFragment.getInstance(
@@ -727,7 +727,7 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
                         iAutomationUnit = this
                 )
                 if (automationUnitsFragment.isAdded) return
-                automationUnitsFragment.show(fragmentManager, AutomationUnitsFragment::class.java.simpleName)
+                fragmentManager?.let { automationUnitsFragment.show(it, AutomationUnitsFragment::class.java.simpleName) }
             }
             R.id.fragment_automation_button_delete -> {
                 var confirmDialog = childFragmentManager.findFragmentByTag("CONFIRM_DIALOG") as ConfirmDialog?
@@ -758,7 +758,7 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
 
         try {
             val inputMethodManager: InputMethodManager? = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            val view: View? = dialog.currentFocus
+            val view: View? = dialog?.currentFocus
 
             inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
         } catch (e: Exception) {

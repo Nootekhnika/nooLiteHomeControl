@@ -1,16 +1,18 @@
 package com.noolitef.ftx
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.DialogFragment
 import com.noolitef.*
 import com.noolitef.settings.Settings
-import okhttp3.*
-import java.lang.StringBuilder
+import okhttp3.Call
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import java.net.ConnectException
 import java.util.*
 import java.util.concurrent.TimeoutException
@@ -54,7 +56,7 @@ class ThermostatSensorSelectorFragment : DialogFragment(), View.OnClickListener,
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.setCanceledOnTouchOutside(true)
+        dialog?.setCanceledOnTouchOutside(true)
 
         val dialogView = inflater.inflate(R.layout.fragment_settings_thermostat_sensors, null)
         buttonBack = dialogView.findViewById(R.id.fragment_settings_thermostat_sensors_button_back)
@@ -76,20 +78,20 @@ class ThermostatSensorSelectorFragment : DialogFragment(), View.OnClickListener,
     override fun onStart() {
         super.onStart()
 
-        val fragmentWindow = dialog.window
-        val dialogParams = fragmentWindow.attributes
-        dialogParams.dimAmount = 0.75f
-        fragmentWindow.attributes = dialogParams
-        fragmentWindow.setBackgroundDrawableResource(R.color.transparent)
+        val fragmentWindow = dialog?.window
+        val dialogParams = fragmentWindow?.attributes
+        dialogParams?.dimAmount = 0.75f
+        fragmentWindow?.attributes = dialogParams
+        fragmentWindow?.setBackgroundDrawableResource(R.color.transparent)
 
         val display = DisplayMetrics()
         homeActivity.windowManager.defaultDisplay.getMetrics(display)
         val displayWidth = display.widthPixels
         val displayHeight = display.heightPixels
         if (displayWidth < displayHeight) {
-            fragmentWindow.setLayout(displayWidth, ViewGroup.LayoutParams.MATCH_PARENT)
+            fragmentWindow?.setLayout(displayWidth, ViewGroup.LayoutParams.MATCH_PARENT)
         } else {
-            fragmentWindow.setLayout(displayHeight, ViewGroup.LayoutParams.MATCH_PARENT)
+            fragmentWindow?.setLayout(displayHeight, ViewGroup.LayoutParams.MATCH_PARENT)
         }
     }
 

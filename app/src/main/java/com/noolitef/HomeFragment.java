@@ -5,15 +5,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
+import com.noolitef.ftx.PowerUnitFA;
 import com.noolitef.ftx.RolletUnitF;
 import com.noolitef.presets.OnPresetLongClickListener;
 import com.noolitef.presets.Preset;
@@ -719,6 +720,10 @@ public class HomeFragment extends Fragment {
             public void onSwitchingF_TX_Ok(final int position, final int state, final int out, final int brightness, final int temperature) {
                 if (units.get(position) instanceof PowerUnitF) {
                     ((PowerUnitF) units.get(position)).setState(state);
+                    ((PowerUnitF) units.get(position)).setBrightness((int) (brightness * 100.0 / 255.0 + .5));
+                }
+                if (units.get(position) instanceof PowerUnitFA) {
+                    ((PowerUnitF) units.get(position)).setState(state);
                     ((PowerUnitF) units.get(position)).setBrightness(brightness);
                 }
                 if (units.get(position) instanceof PowerSocketF) {
@@ -738,8 +743,10 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void run() {
                         unitsRecyclerAdapter.notifyItemChanged(position);
-                        if (powerUnitDialog != null && powerUnitDialog.isAdded())
-                            powerUnitDialog.setBrightness(brightness);
+                        if (powerUnitDialog != null && powerUnitDialog.isAdded()) {
+                            powerUnitDialog.setBrightness((int) (brightness * 100.0 / 255.0 + .5));
+                            powerUnitDialog.setRawData(temperature);
+                        }
                         if (thermostatDialog != null && thermostatDialog.isAdded())
                             thermostatDialog.setCurrentTemperature(temperature);
                     }

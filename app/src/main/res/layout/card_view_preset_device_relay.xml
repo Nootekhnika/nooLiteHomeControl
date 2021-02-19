@@ -35,7 +35,7 @@
             android:textColor="@color/black_light"
             android:textStyle="normal" />
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/card_view_preset_device_switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

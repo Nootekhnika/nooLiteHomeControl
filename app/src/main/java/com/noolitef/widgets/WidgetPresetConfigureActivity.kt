@@ -7,13 +7,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.Button
 import android.widget.EdgeEffect
-import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.noolitef.HomeActivity
 import com.noolitef.PRF64
@@ -45,7 +44,7 @@ class WidgetPresetConfigureActivity : Activity(), View.OnClickListener {
 
         internal fun loadWidgetPresetJson(context: Context, widgetID: Int): String {
             val preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
-            return preferences.getString(PREFERENCE_PREFIX + widgetID, "{\"index\":32,\"name\":\"Сценарий\",\"runTime\":1000}")
+            return preferences.getString(PREFERENCE_PREFIX + widgetID, "{\"index\":32,\"name\":\"Сценарий\",\"runTime\":1000}")!!
         }
 
         internal fun deleteWidgetPresetJson(context: Context, widgetID: Int) {
@@ -84,7 +83,7 @@ class WidgetPresetConfigureActivity : Activity(), View.OnClickListener {
         buttonCancel = findViewById(R.id.widget_configure_activity_button_cancel)
         buttonCancel.setOnClickListener(this)
         recyclerView = findViewById(R.id.widget_configure_activity_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this@WidgetPresetConfigureActivity, LinearLayout.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(this@WidgetPresetConfigureActivity, RecyclerView.VERTICAL, false)
         presetListAdapter = PresetListAdapter(this@WidgetPresetConfigureActivity, presets)
         presetListAdapter.setHasStableIds(true)
         recyclerView.adapter = presetListAdapter

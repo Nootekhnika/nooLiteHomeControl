@@ -94,7 +94,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/card_view_automation_state"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
