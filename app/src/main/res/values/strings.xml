@@ -91,6 +91,7 @@
     <string-array name="automationActionsRelay">
         <item>выключить</item>          <!-- CMD: 0 -->
         <item>включить</item>           <!-- CMD: 2 -->
+        <item>переключить</item>        <!-- CMD: 4 -->
         <item>включить на время</item>  <!-- CMD: 25 -->
     </string-array>
 

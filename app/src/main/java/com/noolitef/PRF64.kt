@@ -996,6 +996,7 @@ class PRF64(private val activity: Activity) {
                                         when (command[4]) {
                                             0 -> "Выключить"
                                             2 -> "Включить"
+                                            4 -> "Переключить"
                                             25 -> "Включить на ${(command[6] * 5.0 / 60.0 + .5).toInt()} мин"
                                             else -> "-"
                                         }

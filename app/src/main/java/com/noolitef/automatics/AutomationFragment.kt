@@ -560,8 +560,10 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
                 0 -> sAction.setSelection(0)
                 // CMD: 2 -> ON
                 2 -> sAction.setSelection(1)
+                // CMD: 4 -> SWITCH
+                4 -> sAction.setSelection(2)
                 // CMD: 25 -> TEMPORARY_ON
-                25 -> sAction.setSelection(2)
+                25 -> sAction.setSelection(3)
                 else -> sAction.setSelection(0)
             }
         } catch (e: Exception) {
@@ -584,6 +586,12 @@ class AutomationFragment : DialogFragment(), View.OnClickListener, IAutomationUn
                         newAutomation?.setCommand(newCommand)
                     }
                     2 -> {
+                        newCommand?.set(4, 4)
+                        newCommand?.set(5, 0)
+                        newCommand?.set(6, 0)
+                        newAutomation?.setCommand(newCommand)
+                    }
+                    3 -> {
                         newCommand?.set(4, 25)
                         newCommand?.set(5, 5)
                         newAutomation?.setCommand(newCommand)
