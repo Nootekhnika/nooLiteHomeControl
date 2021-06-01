@@ -1,9 +1,9 @@
 package com.noolitef.presets;
 
-import android.graphics.Paint;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SwitchCompat;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +60,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private LinearLayout layout;
         private CheckBox selector;
         private TextView name;
+        private TextView time;
         private SwitchCompat switcher;
 
         RelayViewHolder(View item) {
@@ -67,6 +68,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             layout = item.findViewById(R.id.card_view_preset_device_layout);
             selector = item.findViewById(R.id.card_view_preset_device_selector);
             name = item.findViewById(R.id.card_view_preset_device_name);
+            time = item.findViewById(R.id.card_view_preset_device_time);
             switcher = item.findViewById(R.id.card_view_preset_device_switcher);
 
             switcher.setOnClickListener(new View.OnClickListener() {
@@ -90,11 +92,36 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             this.name.setText(name);
         }
 
+        void setTimeVisibility(boolean visible) {
+            if (visible) {
+                if (selector.isChecked())
+                    time.setVisibility(View.VISIBLE);
+            } else {
+                time.setVisibility(View.GONE);
+            }
+        }
+
+        void setTime(int minutes) {
+            if (minutes > 0) {
+                time.setText(String.format(Locale.ROOT, "%dмин", minutes));
+            } else {
+                time.setText("∞");
+            }
+        }
+
+        void setTimeClick(View.OnClickListener listener) {
+            time.setOnClickListener(listener);
+        }
+
         void setSwitchVisible(boolean visible) {
             if (visible) {
                 switcher.setVisibility(View.VISIBLE);
+                if (switcher.isChecked()) {
+                    setTimeVisibility(true);
+                }
             } else {
                 switcher.setVisibility(View.GONE);
+                setTimeVisibility(false);
             }
         }
 
@@ -102,12 +129,19 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             switch (state) {
                 case Preset.OFF:
                     switcher.setChecked(false);
+                    setTimeVisibility(false);
                     break;
                 case Preset.ON:
                     switcher.setChecked(true);
+                    setTimeVisibility(true);
                     break;
                 case Preset.SET_BRIGHTNESS:
                     switcher.setChecked(true);
+                    setTimeVisibility(true);
+                    break;
+                case Preset.TEMPORARY_ON:
+                    switcher.setChecked(true);
+                    setTimeVisibility(true);
                     break;
             }
         }
@@ -121,6 +155,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         private LinearLayout layout;
         private CheckBox selector;
         private TextView name;
+        private TextView time;
         private TextView brightness;
         private SwitchCompat switcher;
 
@@ -129,8 +164,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             layout = item.findViewById(R.id.card_view_preset_device_layout);
             selector = item.findViewById(R.id.card_view_preset_device_selector);
             name = item.findViewById(R.id.card_view_preset_device_name);
+            time = item.findViewById(R.id.card_view_preset_device_time);
             brightness = item.findViewById(R.id.card_view_preset_device_brightness);
-            brightness.setPaintFlags(brightness.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             switcher = item.findViewById(R.id.card_view_preset_device_switcher);
         }
 
@@ -147,6 +182,15 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             this.name.setText(name);
         }
 
+        void setTimeVisibility(boolean visible) {
+            if (visible) {
+                if (selector.isChecked())
+                    time.setVisibility(View.VISIBLE);
+            } else {
+                time.setVisibility(View.GONE);
+            }
+        }
+
         void setBrightnessVisibility(boolean visible) {
             if (visible) {
                 if (selector.isChecked())
@@ -156,8 +200,20 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         }
 
+        void setTime(int minutes) {
+            if (minutes > 0) {
+                time.setText(String.format(Locale.ROOT, "%dмин", minutes));
+            } else {
+                time.setText("∞");
+            }
+        }
+
         void setBrightness(int percent) {
             brightness.setText(String.format(Locale.ROOT, "%d%%", percent));
+        }
+
+        void setTimeClick(View.OnClickListener listener) {
+            time.setOnClickListener(listener);
         }
 
         void setBrightnessClick(View.OnClickListener listener) {
@@ -167,10 +223,13 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         void setSwitchVisibility(boolean visible) {
             if (visible) {
                 switcher.setVisibility(View.VISIBLE);
-                if (switcher.isChecked())
+                if (switcher.isChecked()) {
+                    setTimeVisibility(true);
                     setBrightnessVisibility(true);
+                }
             } else {
                 switcher.setVisibility(View.GONE);
+                setTimeVisibility(false);
                 setBrightnessVisibility(false);
             }
         }
@@ -179,14 +238,22 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             switch (state) {
                 case Preset.OFF:
                     switcher.setChecked(false);
+                    setTimeVisibility(false);
                     setBrightnessVisibility(false);
                     break;
                 case Preset.ON:
                     switcher.setChecked(true);
+                    setTimeVisibility(true);
                     setBrightnessVisibility(true);
                     break;
                 case Preset.SET_BRIGHTNESS:
                     switcher.setChecked(true);
+                    setTimeVisibility(true);
+                    setBrightnessVisibility(true);
+                    break;
+                case Preset.TEMPORARY_ON:
+                    switcher.setChecked(true);
+                    setTimeVisibility(true);
                     setBrightnessVisibility(true);
                     break;
             }
@@ -511,6 +578,35 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
         relayViewHolder.setName(powerUnit.getName());
+        relayViewHolder.setTime(powerUnit.getTime());
+        relayViewHolder.setTimeClick(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PowerUnitDialog powerUnitDialog = (PowerUnitDialog) fragment.getChildFragmentManager().findFragmentByTag("POWER_UNIT_DIALOG");
+                        if (powerUnitDialog == null) {
+                            powerUnitDialog = new PowerUnitDialog();
+                            powerUnitDialog.applyTimePickerMode();
+                            powerUnitDialog.send(null, null, null, null, null, -1, powerUnit);
+                            powerUnitDialog.timeSetListener(
+                                    new TimeSetListener() {
+                                        @Override
+                                        public void setTime(int minutes) {
+                                            powerUnit.setPresetState(PowerUnit.TEMPORARY_ON);
+                                            powerUnit.setTime(minutes);
+                                            relayViewHolder.setTime(minutes);
+                                            if (minutes < 1) {
+                                                powerUnit.setPresetState(PowerUnit.ON);
+                                            }
+                                        }
+                                    }
+                            );
+                        }
+                        if (powerUnitDialog.isAdded()) return;
+                        fragment.getChildFragmentManager().beginTransaction().add(powerUnitDialog, "POWER_UNIT_DIALOG").show(powerUnitDialog).commit();
+                    }
+                }
+        );
         relayViewHolder.setSwitch(powerUnit.getPresetState());
         relayViewHolder.setSwitchCheckedChange(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -521,6 +617,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     } else {
                         powerUnit.setPresetState(PowerUnit.OFF);
                     }
+                    relayViewHolder.setTime(0);
+                    relayViewHolder.setTimeVisibility(checked);
                     sendCommand(powerUnit);
                 }
             }
@@ -551,6 +649,37 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
         dimmerViewHolder.setName(powerUnit.getName());
+        dimmerViewHolder.setTime(powerUnit.getTime());
+        dimmerViewHolder.setTimeClick(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PowerUnitDialog powerUnitDialog = (PowerUnitDialog) fragment.getChildFragmentManager().findFragmentByTag("POWER_UNIT_DIALOG");
+                        if (powerUnitDialog == null) {
+                            powerUnitDialog = new PowerUnitDialog();
+                            powerUnitDialog.applyTimePickerMode();
+                            powerUnitDialog.send(null, null, null, null, null, -1, powerUnit);
+                            powerUnitDialog.timeSetListener(
+                                    new TimeSetListener() {
+                                        @Override
+                                        public void setTime(int minutes) {
+                                            powerUnit.setPresetState(PowerUnit.TEMPORARY_ON);
+                                            powerUnit.setTime(minutes);
+                                            dimmerViewHolder.setTime(minutes);
+                                            dimmerViewHolder.setBrightness(100);
+                                            if (minutes < 1) {
+                                                powerUnit.setPresetState(PowerUnit.SET_BRIGHTNESS);
+                                                powerUnit.setBrightness(100);
+                                            }
+                                        }
+                                    }
+                            );
+                        }
+                        if (powerUnitDialog.isAdded()) return;
+                        fragment.getChildFragmentManager().beginTransaction().add(powerUnitDialog, "POWER_UNIT_DIALOG").show(powerUnitDialog).commit();
+                    }
+                }
+        );
         dimmerViewHolder.setBrightness(powerUnit.getBrightness());
         dimmerViewHolder.setBrightnessClick(new View.OnClickListener() {
             @Override
@@ -562,6 +691,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     powerUnitDialog.brightnessSetListener(new BrightnessSetListener() {
                         @Override
                         public void setBrightness(int percent) {
+                            dimmerViewHolder.setTime(0);
+                            powerUnit.setPresetState(PowerUnit.SET_BRIGHTNESS);
                             powerUnit.setBrightness(percent);
                             dimmerViewHolder.setBrightness(percent);
                         }
@@ -585,6 +716,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         powerUnit.setBrightness(0);
                         dimmerViewHolder.setBrightness(0);
                     }
+                    dimmerViewHolder.setTime(0);
+                    dimmerViewHolder.setTimeVisibility(checked);
                     dimmerViewHolder.setBrightnessVisibility(checked);
                     sendCommand(powerUnit);
                 }
@@ -616,6 +749,35 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
         relayViewHolder.setName(powerUnitF.getName());
+        relayViewHolder.setTime(powerUnitF.getTime());
+        relayViewHolder.setTimeClick(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PowerUnitDialog powerUnitDialog = (PowerUnitDialog) fragment.getChildFragmentManager().findFragmentByTag("POWER_UNIT_DIALOG");
+                        if (powerUnitDialog == null) {
+                            powerUnitDialog = new PowerUnitDialog();
+                            powerUnitDialog.applyTimePickerMode();
+                            powerUnitDialog.send(null, null, null, null, null, -1, powerUnitF);
+                            powerUnitDialog.timeSetListener(
+                                    new TimeSetListener() {
+                                        @Override
+                                        public void setTime(int minutes) {
+                                            powerUnitF.setPresetState(PowerUnitF.TEMPORARY_ON);
+                                            powerUnitF.setTime(minutes);
+                                            relayViewHolder.setTime(minutes);
+                                            if (minutes < 1) {
+                                                powerUnitF.setPresetState(PowerUnit.ON);
+                                            }
+                                        }
+                                    }
+                            );
+                        }
+                        if (powerUnitDialog.isAdded()) return;
+                        fragment.getChildFragmentManager().beginTransaction().add(powerUnitDialog, "POWER_UNIT_DIALOG").show(powerUnitDialog).commit();
+                    }
+                }
+        );
         relayViewHolder.setSwitch(powerUnitF.getPresetState());
         relayViewHolder.setSwitchCheckedChange(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -626,6 +788,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     } else {
                         powerUnitF.setPresetState(PowerUnit.OFF);
                     }
+                    relayViewHolder.setTime(0);
+                    relayViewHolder.setTimeVisibility(checked);
                     sendCommand(powerUnitF);
                 }
             }
@@ -656,6 +820,37 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
         dimmerViewHolder.setName(powerUnitF.getName());
+        dimmerViewHolder.setTime(powerUnitF.getTime());
+        dimmerViewHolder.setTimeClick(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PowerUnitDialog powerUnitDialog = (PowerUnitDialog) fragment.getChildFragmentManager().findFragmentByTag("POWER_UNIT_DIALOG");
+                        if (powerUnitDialog == null) {
+                            powerUnitDialog = new PowerUnitDialog();
+                            powerUnitDialog.applyTimePickerMode();
+                            powerUnitDialog.send(null, null, null, null, null, -1, powerUnitF);
+                            powerUnitDialog.timeSetListener(
+                                    new TimeSetListener() {
+                                        @Override
+                                        public void setTime(int minutes) {
+                                            powerUnitF.setPresetState(PowerUnit.TEMPORARY_ON);
+                                            powerUnitF.setTime(minutes);
+                                            dimmerViewHolder.setTime(minutes);
+                                            dimmerViewHolder.setBrightness(100);
+                                            if (minutes < 1) {
+                                                powerUnitF.setPresetState(PowerUnit.SET_BRIGHTNESS);
+                                                powerUnitF.setBrightness(100);
+                                            }
+                                        }
+                                    }
+                            );
+                        }
+                        if (powerUnitDialog.isAdded()) return;
+                        fragment.getChildFragmentManager().beginTransaction().add(powerUnitDialog, "POWER_UNIT_DIALOG").show(powerUnitDialog).commit();
+                    }
+                }
+        );
         dimmerViewHolder.setBrightness(powerUnitF.getPresetBrightness());
         dimmerViewHolder.setBrightnessClick(new View.OnClickListener() {
             @Override
@@ -667,6 +862,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     powerUnitDialog.brightnessSetListener(new BrightnessSetListener() {
                         @Override
                         public void setBrightness(int percent) {
+                            dimmerViewHolder.setTime(0);
+                            powerUnitF.setPresetState(PowerUnit.SET_BRIGHTNESS);
                             powerUnitF.setPresetBrightness(percent);
                             dimmerViewHolder.setBrightness(percent);
                         }
@@ -690,6 +887,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         powerUnitF.setPresetBrightness(0);
                         dimmerViewHolder.setBrightness(0);
                     }
+                    dimmerViewHolder.setTime(0);
+                    dimmerViewHolder.setTimeVisibility(checked);
                     dimmerViewHolder.setBrightnessVisibility(checked);
                     sendCommand(powerUnitF);
                 }
@@ -721,6 +920,35 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         });
         relayViewHolder.setName(powerSocketF.getName());
+        relayViewHolder.setTime(powerSocketF.getTime());
+        relayViewHolder.setTimeClick(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PowerUnitDialog powerUnitDialog = (PowerUnitDialog) fragment.getChildFragmentManager().findFragmentByTag("POWER_UNIT_DIALOG");
+                        if (powerUnitDialog == null) {
+                            powerUnitDialog = new PowerUnitDialog();
+                            powerUnitDialog.applyTimePickerMode();
+                            powerUnitDialog.send(null, null, null, null, null, -1, powerSocketF);
+                            powerUnitDialog.timeSetListener(
+                                    new TimeSetListener() {
+                                        @Override
+                                        public void setTime(int minutes) {
+                                            powerSocketF.setPresetState(PowerUnitF.TEMPORARY_ON);
+                                            powerSocketF.setTime(minutes);
+                                            relayViewHolder.setTime(minutes);
+                                            if (minutes < 1) {
+                                                powerSocketF.setPresetState(PowerUnit.ON);
+                                            }
+                                        }
+                                    }
+                            );
+                        }
+                        if (powerUnitDialog.isAdded()) return;
+                        fragment.getChildFragmentManager().beginTransaction().add(powerUnitDialog, "POWER_UNIT_DIALOG").show(powerUnitDialog).commit();
+                    }
+                }
+        );
         relayViewHolder.setSwitch(powerSocketF.getPresetState());
         relayViewHolder.setSwitchCheckedChange(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -731,6 +959,8 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     } else {
                         powerSocketF.setPresetState(PowerUnit.OFF);
                     }
+                    relayViewHolder.setTime(0);
+                    relayViewHolder.setTimeVisibility(checked);
                     sendCommand(powerSocketF);
                 }
             }

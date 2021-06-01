@@ -7,9 +7,9 @@ import java.util.Locale;
 public class Preset {
     public static final int OFF = 0;
     public static final int RUNNING = 1;
-
     public static final int ON = 2;
     public static final int SET_BRIGHTNESS = 6;
+    public static final int TEMPORARY_ON = 25;
 
     private int index;
     private int state;

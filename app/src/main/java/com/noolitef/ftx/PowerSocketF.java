@@ -5,6 +5,7 @@ public class PowerSocketF {
     public static final int NOT_CONNECTED = -1;
     public static final int OFF = 0;
     public static final int ON = 2;
+    public static final int TEMPORARY_ON = 25;
 
     private String id;
     private int index;
@@ -58,6 +59,26 @@ public class PowerSocketF {
 
     public void setPresetState(int presetState) {
         this.presetState = command[4] = (byte) presetState;
+        if (presetState == TEMPORARY_ON) {
+            this.command[5] = 5;
+        } else {
+            this.command[5] = 0;
+            this.command[6] = 0;
+        }
+    }
+
+    public int getTime() {
+        if (this.presetState == TEMPORARY_ON) {
+            return (int) ((this.command[6] & 0xFF) * 5 / 60);
+        } else {
+            return 0;
+        }
+    }
+
+    public void setTime(int minutes) {
+        if (minutes > 0) {
+            this.command[6] = (byte) (minutes * 60 / 5);
+        }
     }
 
     public int getState() {

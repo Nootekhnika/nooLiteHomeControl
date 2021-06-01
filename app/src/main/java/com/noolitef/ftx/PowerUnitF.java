@@ -1,10 +1,14 @@
 package com.noolitef.ftx;
 
+import com.noolitef.tx.PowerUnit;
+
 public class PowerUnitF {
     public static final int UPDATING = -2;
     public static final int NOT_CONNECTED = -1;
     public static final int OFF = 0;
     public static final int ON = 2;
+    public static final int SET_BRIGHTNESS = 6;
+    public static final int TEMPORARY_ON = 25;
 
     private String id;
     private int index;
@@ -63,15 +67,46 @@ public class PowerUnitF {
 
     public void setPresetState(int presetState) {
         this.presetState = command[4] = (byte) presetState;
+        //setFMT
+        switch (presetState) {
+            case SET_BRIGHTNESS:
+                this.command[5] = 1;
+                break;
+            case TEMPORARY_ON:
+                this.command[5] = 5;
+                break;
+            default:
+                this.command[5] = 0;
+                this.command[6] = 0;
+        }
     }
 
     public int getPresetBrightness() {
+        switch (this.presetState) {
+            case ON:
+            case TEMPORARY_ON:
+                return 100;
+        }
         return presetBrightness;
     }
 
     public void setPresetBrightness(int percent) {
         this.presetBrightness = percent;
         this.command[6] = (byte) (percent * 2.55 + .5);
+    }
+
+    public int getTime() {
+        if (this.presetState == TEMPORARY_ON) {
+            return (int) ((this.command[6] & 0xFF) * 5 / 60);
+        } else {
+            return 0;
+        }
+    }
+
+    public void setTime(int minutes) {
+        if (minutes > 0) {
+            this.command[6] = (byte) (minutes * 60 / 5);
+        }
     }
 
     public int getState() {
