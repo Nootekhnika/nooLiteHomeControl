@@ -1,9 +1,5 @@
 package com.noolitef.presets;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SwitchCompat;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +9,10 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.noolitef.BrightnessSetListener;
 import com.noolitef.HomeActivity;
@@ -210,6 +210,10 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         void setBrightness(int percent) {
             brightness.setText(String.format(Locale.ROOT, "%d%%", percent));
+        }
+
+        void setBrightnessColor(int color) {
+            brightness.setTextColor(color);
         }
 
         void setTimeClick(View.OnClickListener listener) {
@@ -650,6 +654,11 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         });
         dimmerViewHolder.setName(powerUnit.getName());
         dimmerViewHolder.setTime(powerUnit.getTime());
+        if (powerUnit.getTime() > 0) {
+            dimmerViewHolder.setBrightnessColor(0xFF808080);
+        } else {
+            dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
+        }
         dimmerViewHolder.setTimeClick(
                 new View.OnClickListener() {
                     @Override
@@ -667,9 +676,11 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                                             powerUnit.setTime(minutes);
                                             dimmerViewHolder.setTime(minutes);
                                             dimmerViewHolder.setBrightness(100);
+                                            dimmerViewHolder.setBrightnessColor(0xFF808080);
                                             if (minutes < 1) {
                                                 powerUnit.setPresetState(PowerUnit.SET_BRIGHTNESS);
                                                 powerUnit.setBrightness(100);
+                                                dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                                             }
                                         }
                                     }
@@ -695,6 +706,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                             powerUnit.setPresetState(PowerUnit.SET_BRIGHTNESS);
                             powerUnit.setBrightness(percent);
                             dimmerViewHolder.setBrightness(percent);
+                            dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                         }
                     });
                 }
@@ -821,6 +833,11 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         });
         dimmerViewHolder.setName(powerUnitF.getName());
         dimmerViewHolder.setTime(powerUnitF.getTime());
+        if (powerUnitF.getTime() > 0) {
+            dimmerViewHolder.setBrightnessColor(0xFF808080);
+        } else {
+            dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
+        }
         dimmerViewHolder.setTimeClick(
                 new View.OnClickListener() {
                     @Override
@@ -838,9 +855,11 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                                             powerUnitF.setTime(minutes);
                                             dimmerViewHolder.setTime(minutes);
                                             dimmerViewHolder.setBrightness(100);
+                                            dimmerViewHolder.setBrightnessColor(0xFF808080);
                                             if (minutes < 1) {
                                                 powerUnitF.setPresetState(PowerUnit.SET_BRIGHTNESS);
                                                 powerUnitF.setBrightness(100);
+                                                dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                                             }
                                         }
                                     }
@@ -866,6 +885,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                             powerUnitF.setPresetState(PowerUnit.SET_BRIGHTNESS);
                             powerUnitF.setPresetBrightness(percent);
                             dimmerViewHolder.setBrightness(percent);
+                            dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                         }
                     });
                 }
