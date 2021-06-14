@@ -1170,6 +1170,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         for (int i = 0; i < 73; i++) {
             if ((NooLiteF.getHexString(preset.getCommand(i)[10] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[11] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[12] & 0xFF).concat(NooLiteF.getHexString(preset.getCommand(i)[13] & 0xFF))))).equals(powerSocketF.getId())) {
                 powerSocketF.setPresetState(preset.getCommand(i)[4]);
+                powerSocketF.setTime((preset.getCommand(i)[6] & 0xFF) * 5 / 60);
                 return true;
             }
         }
