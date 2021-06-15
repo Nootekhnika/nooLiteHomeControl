@@ -1,7 +1,5 @@
 package com.noolitef.ftx;
 
-import com.noolitef.tx.PowerUnit;
-
 public class PowerUnitF {
     public static final int UPDATING = -2;
     public static final int NOT_CONNECTED = -1;
@@ -70,7 +68,7 @@ public class PowerUnitF {
         //setFMT
         switch (presetState) {
             case SET_BRIGHTNESS:
-                this.command[5] = 1;
+                this.command[5] = 0;
                 break;
             case TEMPORARY_ON:
                 this.command[5] = 5;

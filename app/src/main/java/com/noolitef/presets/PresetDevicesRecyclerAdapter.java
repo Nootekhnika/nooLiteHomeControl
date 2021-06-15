@@ -723,6 +723,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         powerUnit.setPresetState(PowerUnit.SET_BRIGHTNESS);
                         powerUnit.setBrightness(100);
                         dimmerViewHolder.setBrightness(100);
+                        dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                     } else {
                         powerUnit.setPresetState(PowerUnit.OFF);
                         powerUnit.setBrightness(0);
@@ -902,6 +903,7 @@ class PresetDevicesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         powerUnitF.setPresetState(PowerUnit.SET_BRIGHTNESS);
                         powerUnitF.setPresetBrightness(100);
                         dimmerViewHolder.setBrightness(100);
+                        dimmerViewHolder.setBrightnessColor(0xFF2C58C0);
                     } else {
                         powerUnitF.setPresetState(PowerUnit.OFF);
                         powerUnitF.setPresetBrightness(0);

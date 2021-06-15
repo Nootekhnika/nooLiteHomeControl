@@ -8,7 +8,7 @@ android {
         applicationId 'com.noolitef'
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 20210601
+        versionCode 20210615
         versionName '0.9.3.3'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
