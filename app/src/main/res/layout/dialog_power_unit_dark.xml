@@ -80,7 +80,22 @@
                 android:progressDrawable="@drawable/dimmer_background_dark"
                 android:splitTrack="false"
                 android:thumb="@drawable/dimmer_thumb_dark"
-                android:thumbOffset="0dp" />
+                android:thumbOffset="0dp"
+                android:visibility="visible" />
+
+            <com.noolitef.customview.TimeSeekBar
+                android:id="@+id/dialog_power_unit_seek_bar_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_28"
+                android:background="@null"
+                android:max="21"
+                android:padding="0dp"
+                android:progress="1"
+                android:progressDrawable="@drawable/dimmer_background_dark"
+                android:splitTrack="false"
+                android:thumb="@drawable/universal_thumb_dark"
+                android:thumbOffset="0dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <LinearLayout

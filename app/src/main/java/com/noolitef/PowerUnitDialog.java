@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,11 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.noolitef.customview.PercentageSeekBar;
+import com.noolitef.customview.TimeSeekBar;
 import com.noolitef.ftx.FTXUnitSettingsFragment;
 import com.noolitef.ftx.PowerSocketF;
 import com.noolitef.ftx.PowerUnitF;
 import com.noolitef.ftx.PowerUnitFA;
 import com.noolitef.ftx.RolletUnitF;
+import com.noolitef.presets.TimeSetListener;
 import com.noolitef.settings.Settings;
 import com.noolitef.tx.PowerUnit;
 
@@ -71,6 +75,7 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
     private LinearLayout layoutPulseRelay;
     private LinearLayout layoutRollet;
     private PercentageSeekBar seekBrightness;
+    private TimeSeekBar seekTime; // for Preset
     private Button buttonOn;
     private Button buttonOff;
     private Button temporaryOn;
@@ -80,11 +85,21 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
     private ImageButton buttonSettings;
     private Toast toast;
 
-    private boolean buttonPressed;
+    private boolean isTimePickerMode;
 
+    private TimeSetListener timeSetListener;
     private BrightnessSetListener brightnessSetListener;
 
     public PowerUnitDialog() {
+        isTimePickerMode = false;
+    }
+
+    public void applyTimePickerMode() {
+        isTimePickerMode = true;
+    }
+
+    public void timeSetListener(TimeSetListener listener) {
+        timeSetListener = listener;
     }
 
     public void brightnessSetListener(BrightnessSetListener listener) {
@@ -165,10 +180,13 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
         layoutPulseRelay = dialogView.findViewById(R.id.dialog_power_unit_layout_pulse_relay);
         layoutRollet = dialogView.findViewById(R.id.dialog_power_unit_layout_rollet);
         seekBrightness = dialogView.findViewById(R.id.dialog_power_unit_seek_bar_brightness);
+        seekTime = dialogView.findViewById(R.id.dialog_power_unit_seek_bar_time);
         if (Settings.isNightMode()) {
             seekBrightness.setTextColor(R.color.grey);
+            seekTime.setTextColor(R.color.grey);
         }
         seekBrightness.setOnSeekBarChangeListener(this);
+        seekTime.setOnSeekBarChangeListener(this);
 
         if (powerUnit != null) {
             setupPowerUnit();
@@ -182,6 +200,15 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
                 seekLayout.setVisibility(View.VISIBLE);
             }
             layoutRelay.setVisibility(View.VISIBLE);
+
+            if (isTimePickerMode) {
+                seekTime.setProgress(
+                        powerUnitF.getTime() < 1 ? 21 : powerUnitF.getTime()
+                );
+                seekBrightness.setVisibility(View.GONE);
+                seekTime.setVisibility(View.VISIBLE);
+                seekLayout.setVisibility(View.VISIBLE);
+            }
         }
         if (powerSocketF != null) {
             id = powerSocketF.getId();
@@ -193,6 +220,15 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
             textRoom.setText(powerSocketF.getRoom());
             textName.setText(powerSocketF.getName());
             layoutRelay.setVisibility(View.VISIBLE);
+
+            if (isTimePickerMode) {
+                seekTime.setProgress(
+                        powerSocketF.getTime() < 1 ? 21 : powerSocketF.getTime()
+                );
+                seekBrightness.setVisibility(View.GONE);
+                seekTime.setVisibility(View.VISIBLE);
+                seekLayout.setVisibility(View.VISIBLE);
+            }
         }
         if (rolletUnitF != null) {
             id = rolletUnitF.getId();
@@ -227,7 +263,7 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
 
         // setup for preset
         if (device == null) {
-            if (powerUnitF != null && powerUnitF.isDimmer()) {
+            if (!isTimePickerMode && powerUnitF != null && powerUnitF.isDimmer()) {
                 buttonSettings.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -274,6 +310,17 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+        if (timeSetListener != null) {
+            int time = seekBar.getProgress();
+            if (time < 1) {
+                time = 1;
+                seekTime.setProgress(time);
+            }
+            if (time > 20) {
+                time = 0;
+            }
+            timeSetListener.setTime(time);
+        }
         if (brightnessSetListener != null) {
             brightnessSetListener.setBrightness(seekBar.getProgress());
         }
@@ -463,8 +510,7 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
         id = "00000000";
         textRoom.setText(powerUnit.getRoom());
         textName.setText(powerUnit.getName());
-        if (device == null)  // for Preset
-            seekBrightness.setProgress(powerUnit.getBrightness());
+
         switch (powerUnit.getType()) {
             case PowerUnit.DIMMER:
                 if (Settings.isNightMode()) {
@@ -523,6 +569,18 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
                 layoutRollet.setVisibility(View.VISIBLE);
                 break;
         }
+
+        if (device == null) { // for Preset
+            seekBrightness.setProgress(powerUnit.getBrightness());
+            if (isTimePickerMode) {
+                seekTime.setProgress(
+                        powerUnit.getTime() < 1 ? 21 : powerUnit.getTime()
+                );
+                seekBrightness.setVisibility(View.GONE);
+                seekTime.setVisibility(View.VISIBLE);
+                seekLayout.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void invertOpenClose() {
@@ -536,6 +594,11 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
     }
 
     private void sendCommand(final String command) {
+        // for time set in preset
+        if (client == null) {
+            return;
+        }
+
         Request request = new Request.Builder()
                 .url(Settings.URL().concat("send.htm?sd=").concat(command))
                 .post(RequestBody.create(null, ""))
@@ -585,84 +648,6 @@ public class PowerUnitDialog extends DialogFragment implements View.OnTouchListe
                     call.cancel();
                     showToast("Что-то пошло не так...");
                 }
-            }
-        });
-    }
-
-    private void setPowerUnitFID(final String id) {
-        Request request = new Request.Builder()
-                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=010C%s000000000000000000", id))
-                .post(RequestBody.create(null, ""))
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException exception) {
-                call.cancel();
-                showToast("Нет соединения...");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-                if (response.isSuccessful()) {
-                    try {
-                        call.cancel();
-                        Thread.sleep(100);
-                        readPowerUnitFState(id);
-                    } catch (Exception e) {
-                        response.close();
-                        call.cancel();
-                        showToast(String.format(Locale.ROOT, "Ошибка при считывании состояния блока %s...", textName.getText()));
-                    }
-                } else {
-                    response.close();
-                    call.cancel();
-                    showToast("Ошибка соединения " + response.code());
-                }
-            }
-        });
-    }
-
-    private void readPowerUnitFState(String id) throws IOException, InterruptedException {
-        Request request = new Request.Builder()
-                .url(Settings.URL() + String.format(Locale.ROOT, "send.htm?sd=0002080000801000000000%s", id))
-                .post(RequestBody.create(null, ""))
-                .build();
-        Call call = client.newCall(request);
-        Response response = call.execute();
-        if (response.isSuccessful()) {
-            response.close();
-            call.cancel();
-            Thread.sleep(100);
-            rxset();
-        } else {
-            response.close();
-            call.cancel();
-            showToast("Ошибка соединения " + response.code());
-        }
-    }
-
-    private void rxset() throws IOException {
-        Request request = new Request.Builder()
-                .url(Settings.URL() + "rxset.htm")
-                .build();
-        Call call = client.newCall(request);
-        Response response = call.execute();
-        if (response.isSuccessful()) {
-            rxsetParse(response.body().string());
-            response.close();
-            call.cancel();
-        } else {
-            response.close();
-            call.cancel();
-            showToast("Ошибка соединения " + response.code());
-        }
-    }
-
-    private void rxsetParse(final String hex) {
-        homeActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // rxset.setText(hex);
             }
         });
     }

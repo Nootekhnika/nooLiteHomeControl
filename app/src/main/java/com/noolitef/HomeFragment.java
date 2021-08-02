@@ -321,6 +321,7 @@ public class HomeFragment extends Fragment {
                         sortedDevices.add(mixedDevices.get(d));
                         mixedDevices.remove(d);
                         d--;
+                        continue;
                     }
                 }
                 if (mixedDevices.get(d) instanceof RolletUnitF) {

@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_16"
-            android:layout_toLeftOf="@id/card_view_preset_device_switcher"
+            android:layout_toLeftOf="@id/card_view_preset_device_time"
             android:layout_toRightOf="@id/card_view_preset_device_selector"
             android:ellipsize="marquee"
             android:singleLine="true"
@@ -34,6 +34,22 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/black_light"
             android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/card_view_preset_device_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_toLeftOf="@id/card_view_preset_device_switcher"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="∞"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/blue"
+            android:textStyle="normal"
+            android:visibility="gone" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/card_view_preset_device_switcher"
